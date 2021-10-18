@@ -1,6 +1,7 @@
 import { GraphQLClient, gql } from "graphql-request";
 import Image from "next/image";
 import Link from "next/link";
+import ToyCard from "../components/toyCard";
 
 const endpoint = process.env.ENDPOINT;
 
@@ -15,6 +16,7 @@ export async function getStaticProps() {
     query {
       toys {
         id
+        borrowed
         name
         slug
         toyCategory
@@ -40,18 +42,10 @@ export default function Home({ toys }) {
 
   return (
     <div>
-      {toys.map((toy) => {
-        return (
-          <div key={toy.slug}>
-            <img src={toy.toyImage.url} alt={toy.name} />
-            <a href={toy.slug}>{toy.name}</a>
-            <p>{toy.description}</p>
-            <Link key={toy.slug} href={`/toys/${toy.slug}`}>
-              <a>{toy.name}</a>
-            </Link>
-          </div>
-        );
-      })}
+      <h1 className="text-blue-600 text-6xl text-center">
+        Sensory Toy Library
+      </h1>
+      <ToyCard toys={toys} />
     </div>
   );
 }
