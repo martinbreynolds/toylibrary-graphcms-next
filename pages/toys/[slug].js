@@ -37,6 +37,17 @@ export const getServerSideProps = async (pageContext) => {
     },
   };
 };
+
+const changeToBorrowed = async (slug) => {
+    await fetch('/api/changeToBorrowed', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ slug })
+    })
+}
+
 const Toy = ({ toy }) => {
   
    const [borrowed, setBorrowed] = useState(toy.borrowed)
