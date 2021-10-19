@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const getServerSideProps = async (pageContext) => {
   const endpoint = process.env.ENDPOINT;
@@ -44,13 +44,13 @@ const changeToBorrowed = async (slug, borrowed) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ slug, borrowed }),
-  });
-  console.log(slug, borrowed);
+  }).then(console.log(slug, borrowed));
 };
 
 const Toy = ({ toy }) => {
   const [borrowed, setBorrowed] = useState(toy.borrowed);
-
+  console.log(borrowed);
+  console.log(toy);
   return (
     <div>
       <a href={toy.slug}>{toy.name}</a>
@@ -59,8 +59,12 @@ const Toy = ({ toy }) => {
 
       <button
         onClick={() => {
+          if (!borrowed) {
+            setBorrowed(true);
+          } else {
+            setBorrowed(false);
+          }
           changeToBorrowed(toy.slug, borrowed);
-          borrowed ? setBorrowed(false) : setBorrowed(true);
         }}
       >
         BORROW
