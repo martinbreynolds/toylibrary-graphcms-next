@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import { useState } from 'react';
+import { useState } from "react";
 
 export const getServerSideProps = async (pageContext) => {
   const endpoint = process.env.ENDPOINT;
@@ -10,7 +10,6 @@ export const getServerSideProps = async (pageContext) => {
   });
 
   const pageSlug = pageContext.query.slug;
-  console.log(pageSlug);
 
   const query = gql`
     query($pageSlug: String!) {
@@ -38,34 +37,34 @@ export const getServerSideProps = async (pageContext) => {
   };
 };
 
-const changeToBorrowed = async (slug) => {
-    await fetch('/api/changeToBorrowed', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ slug })
-    })
-}
+const changeToBorrowed = async (slug, borrowed) => {
+  await fetch("/api/borrowed", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ slug, borrowed }),
+  });
+  console.log(slug, borrowed);
+};
 
 const Toy = ({ toy }) => {
-  
-   const [borrowed, setBorrowed] = useState(toy.borrowed)
-   
-   
-  console.log(toy);
+  const [borrowed, setBorrowed] = useState(toy.borrowed);
+
   return (
     <div>
       <a href={toy.slug}>{toy.name}</a>
       <p>{toy.description}</p>
+      <p>{borrowed.toString()}</p>
 
- <button
-                    
-                    onClick={() => {
-                        changeToBorrowed(toy.slug)
-                        borrowed ? setBorrowed(false): setBorrowed(true)
-                    }}
-                >BORROW</button>
+      <button
+        onClick={() => {
+          changeToBorrowed(toy.slug, borrowed);
+          borrowed ? setBorrowed(false) : setBorrowed(true);
+        }}
+      >
+        BORROW
+      </button>
     </div>
   );
 };

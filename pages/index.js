@@ -41,7 +41,7 @@ export default function Home({ toys }) {
   console.log(toys);
 
   return (
-    <div>
+    <div className=" ">
       <h1 className="text-blue-600 text-6xl text-center">
         Sensory Toy Library
       </h1>
