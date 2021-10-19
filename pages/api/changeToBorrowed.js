@@ -11,7 +11,7 @@ export default async ({ body}, res) => {
         mutation($slug: String!) {
           updateToy(where: 
             { slug: $slug}, 
-            data: { seen: true}
+            data: { borrowed: true}
           ) {
             id,
             name,
