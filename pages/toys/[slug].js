@@ -18,6 +18,7 @@ export const getServerSideProps = async (pageContext) => {
         name
         description
         id
+        borrowed
       }
     }
   `;
@@ -36,11 +37,23 @@ export const getServerSideProps = async (pageContext) => {
   };
 };
 const Toy = ({ toy }) => {
+  
+   const [borrowed, setBorrowed] = useState(toy.borrowed)
+   
+   
   console.log(toy);
   return (
     <div>
       <a href={toy.slug}>{toy.name}</a>
       <p>{toy.description}</p>
+
+ <button
+                    
+                    onClick={() => {
+                        changeToBorrowed(toy.slug)
+                        borrowed ? setBorrowed(false): setBorrowed(true)
+                    }}
+                >BORROW</button>
     </div>
   );
 };
