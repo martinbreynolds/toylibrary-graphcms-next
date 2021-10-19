@@ -1,4 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
+import { useState } from 'react';
 
 export const getServerSideProps = async (pageContext) => {
   const endpoint = process.env.ENDPOINT;
