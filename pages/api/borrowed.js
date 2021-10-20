@@ -35,14 +35,14 @@ export default async ({ body }, res) => {
 
   await graphcms.request(mutation, variables);
 
-  // await graphcms.request(
-  //   `mutation publishToy($slug: String) {
-  //       publishToy(where: { slug: $slug}, to: PUBLISHED) {
-  //           slug
-  //           }
-  //       }`,
-  //   { slug: body.slug }
-  // );
+  await graphcms.request(
+    `mutation publishToy($slug: String) {
+        publishToy(where: { slug: $slug}, to: PUBLISHED) {
+            slug
+            }
+        }`,
+    { slug: body.slug }
+  );
 
   res.status(201).json({ slug: body.slug });
 };
