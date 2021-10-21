@@ -5,7 +5,7 @@ import ToyCard from "../components/toyCard";
 
 const endpoint = process.env.ENDPOINT;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const graphQLClient = new GraphQLClient(endpoint, {
     headers: {
       authorization: process.env.GRAPH_CMS_TOKEN,
