@@ -49,6 +49,18 @@ const changeToBorrowed = async (slug, borrowed) => {
 
 const Toy = ({ toy }) => {
   const [borrowed, setBorrowed] = useState(toy.borrowed);
+
+  const changeToBorrowed = async (slug, borrowed) => {
+    const toyMutated = await fetch("/api/borrowed", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ slug, borrowed }),
+    });
+    console.log(toyMutated);
+  };
+
   console.log(borrowed);
   console.log(toy);
   return (
