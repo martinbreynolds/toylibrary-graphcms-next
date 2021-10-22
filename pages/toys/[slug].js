@@ -67,11 +67,6 @@ const Toy = ({ toy, members }) => {
     router.reload(window.location.pathname);
   };
 
-  const newMemberSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.email.value);
-  };
-
   return (
     <div>
       <a href={toy.slug}>{toy.name}</a>
@@ -111,11 +106,6 @@ const Toy = ({ toy, members }) => {
       <p>
         <Link href={`/`}>Back</Link>
       </p>
-
-      <form onSubmit={newMemberSubmit}>
-        <input id="email" className="bg-blue-200" type="text" />
-        <button type="submit">Submit</button>
-      </form>
     </div>
   );
 };
