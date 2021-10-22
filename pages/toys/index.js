@@ -1,5 +1,6 @@
 import { GraphQLClient, gql } from "graphql-request";
-import ToyCard from "../components/toyCard";
+
+import ToyCard from "../../components/toyCard";
 
 const endpoint = process.env.ENDPOINT;
 
@@ -23,27 +24,24 @@ export async function getServerSideProps() {
           url
         }
       }
-      members {
-        id
-        firstName
-        lastName
-        email
-      }
     }
   `;
 
-  const { toys, members } = await graphQLClient.request(query);
+  const { toys } = await graphQLClient.request(query);
 
   return {
     props: {
       toys,
-      members,
     },
   };
 }
 
-export default function Home({ toys, members }) {
-  console.log(toys, members);
+export default function Home({ toys }) {
+  console.log(toys);
 
-  return <>Landing Page</>;
+  return (
+    <>
+      <ToyCard toys={toys} />
+    </>
+  );
 }

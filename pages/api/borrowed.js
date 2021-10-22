@@ -31,6 +31,4 @@ export default async ({ body }, res) => {
 
   await graphcms.request(mutation, variables);
   await graphcms.request(publish, variables);
-
-  res.status(201).json({ slug: body.slug });
 };

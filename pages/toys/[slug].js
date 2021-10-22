@@ -104,7 +104,7 @@ const Toy = ({ toy, members }) => {
         </button>
       )}
       <p>
-        <Link href={`/`}>Back</Link>
+        <Link href={`/toys`}>Back</Link>
       </p>
     </div>
   );

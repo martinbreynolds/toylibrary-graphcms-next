@@ -28,16 +28,16 @@ const ToyCard = ({ toys }) => {
               </p>
             </div>
 
-            <div className=" bg-plum text-white text-center align-middle p-3 font-medium">
+            <div className=" bg-teal text-white text-center align-middle p-3 font-medium">
               {toy.borrowed ? (
-                <p className="text-gray">Sorry, already borrowed</p>
+                <p className=" text-red-50">Sorry, already borrowed</p>
               ) : (
                 <p>You Can Borrow Me</p>
               )}
             </div>
 
             <Link href={`/toys/${toy.slug}`}>
-              <button className="bg-orange text-white uppercase font-black p-3 italic text-lg">
+              <button className="bg-orange text-white uppercase font-black p-3 italic text-lg rounded-b-xl">
                 See More
               </button>
             </Link>
