@@ -1,6 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export const getServerSideProps = async (pageContext) => {
@@ -21,6 +20,16 @@ export const getServerSideProps = async (pageContext) => {
         description
         id
         borrowed
+        member {
+          firstName
+          lastName
+          email
+        }
+      }
+      members {
+        email
+        firstName
+        lastName
       }
     }
   `;
@@ -31,46 +40,65 @@ export const getServerSideProps = async (pageContext) => {
 
   const data = await graphQLClient.request(query, variables);
   const toy = data.toy;
+  const members = data.members;
 
   return {
     props: {
       toy,
+      members,
     },
   };
 };
 
-const Toy = ({ toy }) => {
-  const [borrowed, setBorrowed] = useState(toy.borrowed);
+const Toy = ({ toy, members }) => {
+  console.log(toy);
+  console.log(members);
+
   const router = useRouter();
 
   const changeToBorrowed = async (slug, borrowed) => {
-    const toyMutated = await fetch("/api/borrowed", {
+    await fetch("/api/borrowed", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ slug, borrowed }),
     });
-    console.log(toyMutated);
-
     router.reload(window.location.pathname);
   };
 
-  console.log(toy);
+  const newMemberSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.email.value);
+  };
+
   return (
     <div>
       <a href={toy.slug}>{toy.name}</a>
       <p>{toy.description}</p>
-      <p>{borrowed.toString()}</p>
+      <p>{toy.borrowed.toString()}</p>
 
-      {borrowed ? (
-        <button
-          onClick={() => {
-            changeToBorrowed(toy.slug, false);
-          }}
-        >
-          UNBORROW
-        </button>
+      {toy.borrowed ? (
+        <div>
+          <button
+            onClick={() => {
+              changeToBorrowed(toy.slug, false);
+            }}
+          >
+            UNBORROW
+          </button>
+
+          {toy.member ? (
+            <div>
+              <p>Borrowed by:</p>
+              <p>{toy.member.firstName}</p>
+              <p>{toy.member.lastName}</p>
+              <p>{toy.member.email}</p>
+            </div>
+          ) : (
+            <p>Borrow Form</p>
+          )}
+        </div>
       ) : (
         <button
           onClick={() => {
@@ -80,7 +108,14 @@ const Toy = ({ toy }) => {
           BORROW
         </button>
       )}
-      <Link href={`/`}>Back</Link>
+      <p>
+        <Link href={`/`}>Back</Link>
+      </p>
+
+      <form onSubmit={newMemberSubmit}>
+        <input id="email" className="bg-blue-200" type="text" />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 };

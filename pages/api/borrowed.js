@@ -12,18 +12,6 @@ export default async ({ body }, res) => {
     borrow: body.borrowed,
   };
 
-  const query = gql`
-    query($slug: String!) {
-      toy(where: { slug: $slug }) {
-        slug
-        name
-        description
-        id
-        borrowed
-      }
-    }
-  `;
-
   const mutation = gql`
     mutation($slug: String!, $borrow: Boolean!) {
       updateToy(where: { slug: $slug }, data: { borrowed: $borrow }) {
