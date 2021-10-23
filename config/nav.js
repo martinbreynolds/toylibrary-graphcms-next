@@ -8,8 +8,12 @@ const navButtons = [
     path: "/toys",
   },
   {
-    label: "Members",
-    path: "/members",
+    label: "Loan a Toy",
+    path: "/borrow",
+  },
+  {
+    label: "Current Loans",
+    path: "/loans",
   },
 ];
 
