@@ -1,15 +1,40 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function BorrowMemberSearch({ members }) {
+export default function BorrowMemberSearch({ members, toys }) {
+  // To enable router to refresh page after response from api call
+  const router = useRouter();
+
+  // Set the search Term that we looked for when looking up a existing borrower
   const [searchTerm, setSearchTerm] = useState("");
+  // Set the found member after we've checked to see if the searched member exists
   const [foundMember, setFoundMember] = useState();
+  // Set the chosen Toy we have chosen to borrow and to pass to the api call
+  const [chosenToy, setChosenToy] = useState();
 
   const memberSearch = async (event) => {
     event.preventDefault();
     let searchingMember = members.find((o) => o.email === searchTerm);
     setFoundMember(searchingMember);
     console.log(foundMember);
+  };
+
+  const borrowToy = async (event) => {
+    event.preventDefault();
+    console.log(chosenToy);
+
+    await fetch("../api/borrowed", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: chosenToy,
+        email: foundMember.email,
+      }),
+    });
+    router.reload(window.location.pathname);
   };
 
   return (
@@ -50,11 +75,31 @@ export default function BorrowMemberSearch({ members }) {
             <p className="mx-auto mb-2 text-center text-white">
               {foundMember.email}
             </p>
-            <div className="text-center">
-              <button className="bg-orange rounded-xl text-white px-3 py-2 uppercase font-bold">
-                Borrow Toy
-              </button>
-            </div>
+
+            <form onSubmit={borrowToy}>
+              <select
+                name="select"
+                onChange={(event) => setChosenToy(event.target.value)}
+              >
+                <option>---select---</option>
+                {toys.map((toy) => {
+                  return (
+                    <option value={toy.id} key={toy.id}>
+                      {toy.name}
+                    </option>
+                  );
+                })}
+              </select>
+
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="bg-orange rounded-xl text-white px-3 py-2 uppercase font-bold"
+                >
+                  Borrow Toy
+                </button>
+              </div>
+            </form>
           </div>
         ) : (
           <>

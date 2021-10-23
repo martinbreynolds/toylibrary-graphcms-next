@@ -12,6 +12,12 @@ export const getServerSideProps = async () => {
 
   const query = gql`
     query {
+      toys(where: { borrowed: false }) {
+        id
+        borrowed
+        name
+        description
+      }
       members {
         id
         firstName
@@ -21,19 +27,20 @@ export const getServerSideProps = async () => {
     }
   `;
 
-  const { members } = await graphQLClient.request(query);
+  const { members, toys } = await graphQLClient.request(query);
 
   return {
     props: {
       members,
+      toys,
     },
   };
 };
 
-export default function ItemBorrow({ members }) {
+export default function ItemBorrow({ members, toys }) {
   return (
     <div>
-      <BorrowMemberSearch members={members} />
+      <BorrowMemberSearch members={members} toys={toys} />
     </div>
   );
 }

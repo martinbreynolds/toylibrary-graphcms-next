@@ -8,22 +8,28 @@ export default async ({ body }, res) => {
   });
 
   const variables = {
-    slug: body.slug,
-    borrow: body.borrowed,
+    id: body.id,
+    email: body.email,
   };
 
   const mutation = gql`
-    mutation($slug: String!, $borrow: Boolean!) {
-      updateToy(where: { slug: $slug }, data: { borrowed: $borrow }) {
+    mutation updateToy($id: ID!, $email: String!) {
+      updateToy(
+        data: { borrowed: true, member: { connect: { email: $email } } }
+        where: { id: $id }
+      ) {
         name
+        description
         slug
+        toyCategory
+        borrowed
       }
     }
   `;
 
   const publish = gql`
-    mutation($slug: String) {
-      publishToy(where: { slug: $slug }, to: PUBLISHED) {
+    mutation($id: ID!) {
+      publishToy(where: { id: $id }, to: PUBLISHED) {
         slug
       }
     }
@@ -31,4 +37,6 @@ export default async ({ body }, res) => {
 
   await graphcms.request(mutation, variables);
   await graphcms.request(publish, variables);
+
+  res.status(200).end();
 };

@@ -1,5 +1,4 @@
 import { GraphQLClient, gql } from "graphql-request";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 export const getServerSideProps = async (pageContext) => {
@@ -50,59 +49,12 @@ export const getServerSideProps = async (pageContext) => {
   };
 };
 
-const Toy = ({ toy, members }) => {
-  console.log(toy);
-  console.log(members);
-
-  const router = useRouter();
-
-  const changeToBorrowed = async (slug, borrowed) => {
-    await fetch("/api/borrowed", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ slug, borrowed }),
-    });
-    router.reload(window.location.pathname);
-  };
-
+const Toy = ({ toy }) => {
   return (
     <div>
       <a href={toy.slug}>{toy.name}</a>
       <p>{toy.description}</p>
-      <p>{toy.borrowed.toString()}</p>
 
-      {toy.borrowed ? (
-        <div>
-          <button
-            onClick={() => {
-              changeToBorrowed(toy.slug, false);
-            }}
-          >
-            UNBORROW
-          </button>
-
-          {toy.member ? (
-            <div>
-              <p>Borrowed by:</p>
-              <p>{toy.member.firstName}</p>
-              <p>{toy.member.lastName}</p>
-              <p>{toy.member.email}</p>
-            </div>
-          ) : (
-            <p>Borrow Form</p>
-          )}
-        </div>
-      ) : (
-        <button
-          onClick={() => {
-            changeToBorrowed(toy.slug, true);
-          }}
-        >
-          BORROW
-        </button>
-      )}
       <p>
         <Link href={`/toys`}>Back</Link>
       </p>
