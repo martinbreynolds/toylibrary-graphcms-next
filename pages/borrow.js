@@ -1,5 +1,4 @@
 import { GraphQLClient, gql } from "graphql-request";
-import { useState } from "react";
 import BorrowMemberSearch from "../components/borrowing/borrow";
 
 export const getServerSideProps = async () => {
@@ -38,6 +37,7 @@ export const getServerSideProps = async () => {
 };
 
 export default function ItemBorrow({ members, toys }) {
+  console.log(members, toys);
   return (
     <div>
       <BorrowMemberSearch members={members} toys={toys} />

@@ -15,6 +15,10 @@ const navButtons = [
     label: "Current Loans",
     path: "/loans",
   },
+  {
+    label: "Members",
+    path: "/members",
+  },
 ];
 
 export default navButtons;
