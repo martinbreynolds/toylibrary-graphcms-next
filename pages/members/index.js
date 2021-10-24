@@ -1,6 +1,6 @@
 import useSWR from "swr";
-import MemberCard from "../../components/memberCard";
-import AddMember from "../../components/addMember";
+import MemberCard from "../../components/members/memberCard";
+import AddMember from "../../components/members/addMember";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 

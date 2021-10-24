@@ -1,6 +1,6 @@
 import { GraphQLClient, gql } from "graphql-request";
 
-import ToyCard from "../../components/toyCard";
+import ToyCard from "../../components/toys/toyCard";
 
 const endpoint = process.env.ENDPOINT;
 
