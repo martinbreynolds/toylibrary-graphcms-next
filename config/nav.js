@@ -1,9 +1,5 @@
 const navButtons = [
   {
-    label: "Home",
-    path: "/",
-  },
-  {
     label: "Admin",
     path: "/admin",
   },
