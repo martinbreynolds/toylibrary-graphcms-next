@@ -1,16 +1,16 @@
 import Header from "./header";
 import NavBar from "./navigation/navBar";
 
-import navButtons from "../config/nav";
+import navButtons from "../../config/navAdmin";
 
-const SiteLayout = ({ children }) => {
+const AdminSiteLayout = ({ children }) => {
   return (
     <div>
       <Header />
       <NavBar navButtons={navButtons} />
-      <main>{children}</main>
+      <main className="p-10">{children}</main>
     </div>
   );
 };
 
-export default SiteLayout;
+export default AdminSiteLayout;

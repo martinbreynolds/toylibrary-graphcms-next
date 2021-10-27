@@ -13,33 +13,50 @@ export default async function fetchData(_req, res) {
       query {
         members {
           id
+          email
           firstName
           lastName
-          email
           toys {
             id
             name
-            slug
             description
             borrowed
             toyCategory
+            slug
             toyImage {
               id
               url
             }
           }
         }
+        toys {
+          id
+          name
+          description
+          borrowed
+          toyCategory
+          slug
+          toyImage {
+            id
+            url
+          }
+          member {
+            id
+            email
+            firstName
+            lastName
+          }
+        }
       }
     `;
 
     const data = await graphQLClient.request(query);
-    const members = data.members;
 
-    res.status(200).json(members);
+    res.status(200).json(data);
 
     return {
       props: {
-        members,
+        data,
       },
     };
   } catch (error) {

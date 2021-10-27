@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ToyCard = ({ toys }) => {
   return (
-    <div className="grid grid-cols-5 gap-3 m-3 p-3">
+    <div className="grid grid-cols-5 gap-3">
       {toys.map((toy) => {
         return (
           <div

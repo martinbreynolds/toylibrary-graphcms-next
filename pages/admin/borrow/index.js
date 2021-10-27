@@ -1,5 +1,6 @@
 import { GraphQLClient, gql } from "graphql-request";
-import BorrowMemberSearch from "../components/borrowing/borrow";
+import BorrowMemberSearch from "../../../components/borrowing/borrow";
+import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
 
 export const getServerSideProps = async () => {
   const endpoint = process.env.ENDPOINT;
@@ -36,11 +37,15 @@ export const getServerSideProps = async () => {
   };
 };
 
-export default function ItemBorrow({ members, toys }) {
+export default function Borrow({ members, toys }) {
   console.log(members, toys);
   return (
-    <div>
+    <>
       <BorrowMemberSearch members={members} toys={toys} />
-    </div>
+    </>
   );
 }
+
+Borrow.getLayout = function getLayout(page) {
+  return <AdminSiteLayout>{page}</AdminSiteLayout>;
+};

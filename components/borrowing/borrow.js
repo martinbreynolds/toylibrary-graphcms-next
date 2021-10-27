@@ -39,7 +39,7 @@ export default function BorrowMemberSearch({ members, toys }) {
 
   return (
     <>
-      <div className="flex flex-col bg-white mt-10 w-1/6 my-auto mx-auto rounded-xl">
+      <div className="flex flex-col bg-white w-1/4 my-auto mx-auto rounded-xl">
         <div className="bg-teal p-3 my-auto rounded-t-xl">
           <p className="my-2 text-white font-bold text-center">
             Find Existing or Create New Borrower
