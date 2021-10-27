@@ -1,9 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 
 const ToyCard = ({ toys }) => {
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {toys.map((toy) => {
         return (
           <div
