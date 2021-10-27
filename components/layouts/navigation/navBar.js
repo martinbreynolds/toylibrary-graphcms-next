@@ -10,10 +10,10 @@ export default function NavBar(props) {
 
   console.log(props);
   return (
-    <nav className="lg:py-3 lg:bg-teal flex-col lg:flex-row flex p-2 justify-end lg:justify-between border-b-2 border-white">
+    <nav className="lg:py-3 bg-teal flex-col lg:flex-row flex p-2 justify-end lg:justify-between border-b-2 border-white">
       <button
         onClick={handleClick}
-        className="inline-flex hover:bg-none rounded lg:hidden text-white ml-auto hover:text-white outline-none"
+        className="inline-flex hover:bg-white rounded lg:hidden text-white ml-auto hover:text-teal border-white border-2 m-1 outline-none"
       >
         <svg
           className="w-6 h-6"

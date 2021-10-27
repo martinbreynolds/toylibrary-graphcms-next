@@ -1,18 +1,19 @@
 import useSWR from "swr";
-import ToyCard from "../../components/toys/toyCard";
+import AdminIndexCard from "../../components/layouts/adminIndexCard";
+import AdminButton from "../../components/layouts/adminButton";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-
-export default function Home() {
-  const { data, error } = useSWR("/api/fetchData", fetcher);
-
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
-  return <ToyCard toys={data.toys} />;
+export default function Admin() {
+  return (
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <AdminButton label="Borrow a Toy" />
+      <AdminButton label="Return a Toy" />
+      <AdminIndexCard title="toys" single="Toy" />
+      <AdminIndexCard title="members" single="Member" />
+    </div>
+  );
 }
 import AdminSiteLayout from "../../components/layouts/adminSiteLayout";
 
-Home.getLayout = function getLayout(page) {
+Admin.getLayout = function getLayout(page) {
   return <AdminSiteLayout>{page}</AdminSiteLayout>;
 };

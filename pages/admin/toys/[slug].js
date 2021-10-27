@@ -1,5 +1,6 @@
 import { GraphQLClient, gql } from "graphql-request";
 import Link from "next/link";
+import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
 
 export const getServerSideProps = async (pageContext) => {
   const endpoint = process.env.ENDPOINT;
@@ -10,6 +11,7 @@ export const getServerSideProps = async (pageContext) => {
   });
 
   const pageSlug = pageContext.query.slug;
+  console.log(pageSlug);
 
   const query = gql`
     query($pageSlug: String!) {
@@ -63,3 +65,7 @@ const Toy = ({ toy }) => {
 };
 
 export default Toy;
+
+Toy.getLayout = function getLayout(page) {
+  return <AdminSiteLayout>{page}</AdminSiteLayout>;
+};
