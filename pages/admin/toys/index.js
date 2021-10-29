@@ -1,46 +1,17 @@
 import { GraphQLClient, gql } from "graphql-request";
 import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
+import useSWR from "swr";
+import ToyCardAdmin from "../../../components/toys/toyCardAdmin";
 
-import ToyCard from "../../../components/toys/toyCard";
-
-const endpoint = process.env.ENDPOINT;
-
-export async function getServerSideProps() {
-  const graphQLClient = new GraphQLClient(endpoint, {
-    headers: {
-      authorization: process.env.GRAPH_CMS_TOKEN,
-    },
-  });
-
-  const query = gql`
-    query {
-      toys {
-        id
-        borrowed
-        name
-        slug
-        toyCategory
-        description
-        toyImage {
-          url
-        }
-      }
-    }
-  `;
-
-  const { toys } = await graphQLClient.request(query);
-
-  return {
-    props: {
-      toys,
-    },
-  };
-}
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Toys({ toys }) {
-  console.log(toys);
+  const { data, error } = useSWR("/api/fetchData", fetcher);
 
-  return <ToyCard toys={toys} />;
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
+  return <ToyCardAdmin toys={data.toys} />;
 }
 
 Toys.getLayout = function getLayout(page) {

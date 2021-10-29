@@ -1,6 +1,6 @@
 const navButtons = [
   {
-    label: "Admin",
+    label: "Sign In",
     path: "/admin",
   },
 ];

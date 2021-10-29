@@ -1,7 +1,7 @@
 const navAdminButtons = [
   {
     label: "Home",
-    path: "/",
+    path: "/admin",
   },
   {
     label: "Toys",
@@ -18,6 +18,10 @@ const navAdminButtons = [
   {
     label: "Return a Toy",
     path: "/admin/return",
+  },
+  {
+    label: "Sign Out",
+    path: "/",
   },
 ];
 
