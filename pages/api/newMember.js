@@ -45,6 +45,6 @@ export default async ({ body }, res) => {
 
     res.status(200).json(data);
   } catch (error) {
-    res.status(500).send(console.error());
+    res.status(500).send(console.error(error));
   }
 };

@@ -11,7 +11,7 @@ export default function AddMember() {
   const newMember = async (event) => {
     console.log(event, fName, lName, email);
     event.preventDefault();
-    await fetch("../api/newMember", {
+    await fetch("../../api/newMember", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export default function AddMember() {
     setFName("");
     setLName("");
     setEmail("");
-    router.reload(window.location.pathname);
+    router.push("../members");
   };
 
   return (
