@@ -60,6 +60,6 @@ export default async function fetchData(_req, res) {
       },
     };
   } catch (error) {
-    res.status(500).send(console.error());
+    res.status(500).send(console.error(error));
   }
 }

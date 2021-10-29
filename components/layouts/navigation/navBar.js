@@ -8,7 +8,6 @@ export default function NavBar(props) {
     setActive(!active);
   };
 
-  console.log(props);
   return (
     <nav className="lg:py-3 bg-teal flex-col lg:flex-row flex p-2 justify-end lg:justify-between border-b-2 border-white">
       <button

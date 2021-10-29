@@ -48,7 +48,7 @@ const MemberCard = (props) => {
           <a href={`mailto:${data.email}`} className="col-span-3 font-bold">
             {data.email}
           </a>
-          <Link href={`/members/${data.id}`}>
+          <Link passHref href={`/admin/members/${data.id}`}>
             <button className="text-center font-black rounded-lg text-white bg-orange border-2 border-orange">
               <FontAwesomeIcon icon={faUserEdit} />
             </button>

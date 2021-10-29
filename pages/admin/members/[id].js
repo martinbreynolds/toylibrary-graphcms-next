@@ -51,7 +51,7 @@ const Member = ({ member }) => {
       <p>{member.lastName}</p>
       <p>{member.email}</p>
       <p>
-        <Link href={`/members`}>Back</Link>
+        <Link href={`/admin/members`}>Back</Link>
       </p>
     </div>
   );
