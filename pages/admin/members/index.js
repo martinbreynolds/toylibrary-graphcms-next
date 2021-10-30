@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import MemberCard from "../../../components/members/memberCard";
+import MemberList from "../../../components/members/memberList";
 import AddMember from "../../../components/members/addMember";
 import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
 
@@ -13,7 +13,7 @@ export default function Members() {
   return (
     <>
       <AddMember data={data.members} />
-      <MemberCard data={data.members} />
+      <MemberList data={data.members} />
     </>
   );
 }
