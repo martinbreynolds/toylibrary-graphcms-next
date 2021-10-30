@@ -35,7 +35,7 @@ const ToyCard = ({ toys }) => {
               )}
             </div>
 
-            <Link href={`/toys/${toy.slug}`}>
+            <Link href={`../admin/toys/${toy.slug}`}>
               <button className="bg-orange text-white uppercase font-black p-3 italic text-lg rounded-b-xl">
                 See More
               </button>

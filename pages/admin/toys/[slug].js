@@ -1,65 +1,40 @@
-import { GraphQLClient, gql } from "graphql-request";
-import Link from "next/link";
+import useSWR from "swr";
 import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
 
 export const getServerSideProps = async (pageContext) => {
-  const endpoint = process.env.ENDPOINT;
-  const graphQLClient = new GraphQLClient(endpoint, {
-    headers: {
-      authorization: process.env.GRAPH_CMS_TOKEN,
-    },
-  });
-
   const pageSlug = pageContext.query.slug;
-  console.log(pageSlug);
-
-  const query = gql`
-    query($pageSlug: String!) {
-      toy(where: { slug: $pageSlug }) {
-        slug
-        name
-        description
-        id
-        borrowed
-        member {
-          firstName
-          lastName
-          email
-        }
-      }
-      members {
-        email
-        firstName
-        lastName
-      }
-    }
-  `;
-
-  const variables = {
-    pageSlug,
-  };
-
-  const data = await graphQLClient.request(query, variables);
-  const toy = data.toy;
-  const members = data.members;
 
   return {
     props: {
-      toy,
-      members,
+      pageSlug,
     },
   };
 };
 
-const Toy = ({ toy }) => {
+async function fetcher(url, pageSlug) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      pageSlug,
+    }),
+  });
+  return res.json();
+}
+
+const Toy = ({ pageSlug }) => {
+  const { data, error } = useSWR(["/api/fetchToy", pageSlug], { fetcher });
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  const toy = data.toy;
+
   return (
     <div>
-      <a href={toy.slug}>{toy.name}</a>
+      <p>{toy.name}</p>
       <p>{toy.description}</p>
-
-      <p>
-        <Link href={`/toys`}>Back</Link>
-      </p>
     </div>
   );
 };
