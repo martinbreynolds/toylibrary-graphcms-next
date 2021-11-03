@@ -3,7 +3,7 @@ import { faUserEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const MemberCard = (props) => {
+const MemberList = (props) => {
   const router = useRouter();
 
   const deleteMember = async (e) => {
@@ -61,4 +61,4 @@ const MemberCard = (props) => {
   );
 };
 
-export default MemberCard;
+export default MemberList;

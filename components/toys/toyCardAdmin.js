@@ -31,15 +31,13 @@ const ToyCard = ({ toys }) => {
               {toy.borrowed ? (
                 <p className=" text-red-50">Sorry, already borrowed</p>
               ) : (
-                <p>You Can Borrow Me</p>
+                <Link href="../admin/borrow/" passHref>
+                  <button className="bg-orange text-white uppercase font-black p-3 italic text-lg rounded-b-xl">
+                    Loan This Toy
+                  </button>
+                </Link>
               )}
             </div>
-
-            <Link href={`../admin/toys/${toy.slug}`}>
-              <button className="bg-orange text-white uppercase font-black p-3 italic text-lg rounded-b-xl">
-                See More
-              </button>
-            </Link>
           </div>
         );
       })}

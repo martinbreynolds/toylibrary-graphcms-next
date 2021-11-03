@@ -16,6 +16,15 @@ export default async function fetchMember(req, res) {
           firstName
           lastName
           email
+          toys {
+            name
+            slug
+            toyCategory
+            toyImage {
+              fileName
+              url
+            }
+          }
         }
       }
     `;

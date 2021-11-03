@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
+import MemberCard from "../../../components/members/memberCard";
 
 export const getServerSideProps = async (pageContext) => {
   const pageID = pageContext.query.id;
@@ -31,13 +32,7 @@ const Member = ({ pageID }) => {
   if (!data) return <div>loading...</div>;
   const member = data.member;
 
-  return (
-    <div>
-      <p>{member.firstName}</p>
-      <p>{member.lastName}</p>
-      <p>{member.email}</p>
-    </div>
-  );
+  return <MemberCard member={member} />;
 };
 
 export default Member;
