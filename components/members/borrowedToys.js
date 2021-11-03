@@ -13,8 +13,10 @@ export default function BorrowedToysMember({ member }) {
       {member.toys.length !== 0 ? (
         member.toys.map((toy) => {
           return (
-            <div key={toy.id}>
+            <div key={toy.slug}>
               <p>{toy.name}</p>
+              <p>{toy.description}</p>
+              <img src={toy.toyImage.url} alt={toy.name} />
             </div>
           );
         })

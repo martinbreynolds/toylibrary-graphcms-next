@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function MemberDetails({ member }) {
+  const router = useRouter();
   const [firstName, setFirstName] = useState(member.firstName);
   const [lastName, setLastName] = useState(member.lastName);
   const [email, setEmail] = useState(member.email);
@@ -27,7 +29,7 @@ export default function MemberDetails({ member }) {
     console.log(firstNameButton, lastNameButton, emailButton);
   };
 
-  const handleSaveClick = (event) => {
+  const handleSaveClick = async (event) => {
     const firstNameButton = document.getElementById("firstName");
     const lastNameButton = document.getElementById("lastName");
     const emailButton = document.getElementById("email");
@@ -41,7 +43,20 @@ export default function MemberDetails({ member }) {
     emailButton.disabled = disabledInput;
     firstNameButton.classList.remove("bg-teal", "text-white");
 
-    console.log(firstNameButton, lastNameButton, emailButton);
+    await fetch("../../api/updateMember", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+      }),
+    });
+
+    router.push("../members");
+    console.log(firstName, lastName, email);
   };
 
   return (
