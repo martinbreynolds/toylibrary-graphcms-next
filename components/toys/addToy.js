@@ -1,87 +1,83 @@
-// import { useState } from "react";
+import { useState } from "react";
+import useSWR from "swr";
+import { GraphQLClient, gql } from "graphql-request";
 // import { useRouter } from "next/router";
 
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 export default function AddToy() {
-  // const router = useRouter();
+  const [file, setFile] = useState();
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [borrowed, setBorrowed] = useState(false);
+  const [category, setCategory] = useState();
+  const { data, error } = useSWR("/api/fetchEnums", fetcher);
 
-  // const [name, setName] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [email, setEmail] = useState("");
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
 
-  // const newMember = async (event) => {
-  //   console.log(event, fName, lName, email);
-  //   event.preventDefault();
-  //   await fetch("../api/newToy", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       fName,
-  //       lName,
-  //       email,
-  //     }),
-  //   });
-  //   setFName("");
-  //   setLName("");
-  //   setEmail("");
-  //   router.reload(window.location.pathname);
-  // };
+  const enumValues = data.__type.enumValues;
+
+  console.log(enumValues);
+
+  const handleAsset = async (event) => {
+    event.preventDefault();
+    const form = new FormData();
+    form.append("fileUpload", file);
+
+    const response = await fetch("../../api/createAsset", {
+      method: "POST",
+      body: form,
+    });
+    const resData = await response.json();
+    console.log("Front End " + resData);
+  };
 
   return (
-    //   <div className="mb-3 bg-teal p-3 rounded-lg">
-    //     <p className="text-white text-md font-bold mb-3">Create a New Member</p>
-    //     <form onSubmit={newMember}>
-    //       <div className="grid grid-cols-4">
-    //         <label className="text-white" htmlFor="fName">
-    //           First Name
-    //         </label>
-    //         <label className="text-white" htmlFor="lName">
-    //           Last Name
-    //         </label>
-    //         <label className="text-white" htmlFor="email">
-    //           Email Address
-    //         </label>
-    //       </div>
-    //       <div className="grid grid-cols-4 ">
-    //         <input
-    //           className="text-plum font-bold rounded-lg mr-3"
-    //           name="fName"
-    //           autoComplete="First Name"
-    //           type="text"
-    //           required
-    //           onChange={(event) => setFName(event.target.value)}
-    //           value={fName}
-    //         />
+    <>
+      <form onSubmit={handleAsset} className="flex flex-col">
+        <label htmlFor="name">Name</label>
+        <input
+          value={name}
+          name="name"
+          type="text"
+          onChange={(event) => setName(event.target.value)}
+        />
+        <label htmlFor="description">Description</label>
+        <input
+          value={description}
+          name="description"
+          type="text"
+          onChange={(event) => setDescription(event.target.value)}
+        />
 
-    //         <input
-    //           className="text-plum font-bold mr-3 rounded-lg"
-    //           name="lName"
-    //           autoComplete="Last Name"
-    //           type="text"
-    //           required
-    //           onChange={(event) => setLName(event.target.value)}
-    //           value={lName}
-    //         />
+        <select
+          name="select"
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option>---Select Category---</option>
+          {enumValues.map((enumVal) => {
+            return (
+              <option value={enumVal.name} key={enumVal.name}>
+                {enumVal.name}
+              </option>
+            );
+          })}
+        </select>
 
-    //         <input
-    //           className="text-plum font-bold mr-3 rounded-lg max-w-md"
-    //           name="email"
-    //           autoComplete="Email Address"
-    //           type="email"
-    //           required
-    //           onChange={(event) => setEmail(event.target.value)}
-    //           value={email}
-    //         />
-
-    <button
-      type="submit"
-      className="text-white bg-plum font-bold rounded-lg py-2 px-3"
-    >
-      Create New Member
-    </button>
-    //     </div>
-    //   </form>
-    // </div>
+        <label htmlFor="image">Add Image</label>
+        <input
+          name="image"
+          type="file"
+          onChange={(event) => setFile(event.target.files[0])}
+        />
+        <button
+          type="submit"
+          className="text-white bg-plum font-bold rounded-lg py-2 px-3"
+        >
+          Upload Image
+        </button>
+      </form>
+    </>
   );
 }
