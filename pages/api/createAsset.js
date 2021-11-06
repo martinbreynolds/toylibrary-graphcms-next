@@ -46,12 +46,19 @@ export default async function endpoint(req, res) {
     const resDataID = resData.id;
     console.log(resData);
 
+    var slug = data.fields.name;
+    slug = slug.toLowerCase().replace(/ +/g, "");
+    slug += resDataID;
+
+    console.log(slug);
+
     const variables = {
       id: resDataID,
       name: data.fields.name,
       description: data.fields.description,
       toyCategory: [data.fields.category],
       borrowed: false,
+      slug: slug,
     };
 
     const publishAsset = gql`
@@ -73,11 +80,13 @@ export default async function endpoint(req, res) {
         $toyCategory: [Category!]
         $borrowed: Boolean
         $id: ID!
+        $slug: String!
       ) {
         createToy(
           data: {
             name: $name
             description: $description
+            slug: $slug
             toyCategory: $toyCategory
             borrowed: $borrowed
             toyImage: { connect: { id: $id } }
