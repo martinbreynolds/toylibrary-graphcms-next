@@ -7,10 +7,9 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function AddToy() {
   const [file, setFile] = useState();
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [borrowed, setBorrowed] = useState(false);
-  const [category, setCategory] = useState();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const { data, error } = useSWR("/api/fetchEnums", fetcher);
 
   if (error) return <div>failed to load</div>;
@@ -24,6 +23,9 @@ export default function AddToy() {
     event.preventDefault();
     const form = new FormData();
     form.append("fileUpload", file);
+    form.append("name", name);
+    form.append("description", description);
+    form.append("category", category);
 
     const response = await fetch("../../api/createAsset", {
       method: "POST",

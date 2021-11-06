@@ -25,8 +25,9 @@ export default async function endpoint(req, res) {
       });
     });
 
-    const form = new FormData();
-    form.append(
+    console.log(data);
+    const ImageForm = new FormData();
+    ImageForm.append(
       "fileUpload",
       fs.createReadStream(data.files.fileUpload.filepath)
     );
@@ -38,7 +39,7 @@ export default async function endpoint(req, res) {
         headers: {
           Authorization: process.env.GRAPH_CMS_TOKEN,
         },
-        body: form,
+        body: ImageForm,
       }
     );
     const resData = await response.json();
@@ -47,9 +48,13 @@ export default async function endpoint(req, res) {
 
     const variables = {
       id: resDataID,
+      name: data.fields.name,
+      description: data.fields.description,
+      toyCategory: [data.fields.category],
+      borrowed: false,
     };
 
-    const publish = gql`
+    const publishAsset = gql`
       mutation($id: ID!) {
         publishAsset(where: { id: $id }, to: PUBLISHED) {
           id
@@ -57,8 +62,58 @@ export default async function endpoint(req, res) {
       }
     `;
 
-    const publishData = await graphcms.request(publish, variables);
-    res.status(200).json(publishData);
+    const publishAssetFile = await graphcms.request(publishAsset, variables);
+
+    // Upload New Toy
+
+    const createToy = gql`
+      mutation createToy(
+        $name: String!
+        $description: String!
+        $toyCategory: [Category!]
+        $borrowed: Boolean
+        $id: ID!
+      ) {
+        createToy(
+          data: {
+            name: $name
+            description: $description
+            toyCategory: $toyCategory
+            borrowed: $borrowed
+            toyImage: { connect: { id: $id } }
+          }
+        ) {
+          id
+          name
+          description
+          slug
+        }
+      }
+    `;
+
+    const createToyUpload = await graphcms.request(createToy, variables);
+
+    const createToyUploadData = await createToyUpload;
+    console.log(createToyUploadData);
+    const toyUploadedID = createToyUploadData.createToy.id;
+    console.log(toyUploadedID);
+
+    const toyVariables = {
+      id: toyUploadedID,
+    };
+
+    const toyPublish = gql`
+      mutation($id: ID!) {
+        publishToy(where: { id: $id }, to: PUBLISHED) {
+          id
+          name
+        }
+      }
+    `;
+
+    const publishToyUpload = await graphcms.request(toyPublish, toyVariables);
+
+    res.status(200).json(publishAssetFile, createToyUpload, publishToyUpload);
   } catch (error) {
     res.status(500).send(console.error(error));
   }
