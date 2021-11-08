@@ -1,11 +1,13 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { GraphQLClient, gql } from "graphql-request";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function AddToy() {
+  const router = useRouter();
+
   const [file, setFile] = useState();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -33,6 +35,7 @@ export default function AddToy() {
     });
     const resData = await response.json();
     console.log("Front End " + resData);
+    router.push("../toys");
   };
 
   return (
