@@ -6,8 +6,8 @@ import navButtons from "../../config/nav";
 const SiteLayout = ({ children }) => {
   return (
     <>
-      <Header />
       <NavBar navButtons={navButtons} />
+      <Header />
       <main className="p-10">{children}</main>
     </>
   );
