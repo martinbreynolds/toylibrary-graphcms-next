@@ -1,21 +1,13 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-// let hostPort;
-// if (typeof window !== "undefined") {
-//   hostPort = window.location.origin;
-// }
-// console.log(hostPort);
+import bcrypt from "bcrypt";
+import { useState } from "react";
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "credentials",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         email: {
           label: "Email",
@@ -24,26 +16,35 @@ export default NextAuth({
         },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials, req) {
-        console.log(req);
+        const hashedPassword = await bcrypt.hashSync(credentials.password, 12);
 
         try {
           const res = await fetch(`${req.headers.origin}/api/fetchUser`, {
             method: "POST",
-            body: JSON.stringify(credentials),
+            body: JSON.stringify({
+              csrfToken: credentials.csrfToken,
+              email: credentials.email,
+              password: hashedPassword,
+            }),
             headers: { "Content-Type": "application/json" },
           });
           const data = await res.json();
 
+          const passwordMatch = await bcrypt.compareSync(
+            credentials.password,
+            data.practitioner.password
+          );
+
           if (data.practitioner !== null) {
             if (
               credentials.email === data.practitioner.emailAddress &&
-              credentials.password === data.practitioner.password
+              passwordMatch == true
             ) {
               const user = {
                 id: data.practitioner.id,
                 email: data.practitioner.emailAddress,
-                password: data.practitioner.password,
               };
               return user;
             }
