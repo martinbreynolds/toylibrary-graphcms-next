@@ -1,14 +1,14 @@
 import { useSession } from "next-auth/react";
 import { signIn, signOut } from "next-auth/react";
 
-const Header = () => {
-  const { data: session, status } = useSession();
+const Header = ({ session, status }) => {
+  // const { data: session, status } = useSession();
 
-  // let hostPort;
-  // if (typeof window !== "undefined") {
-  //   hostPort = window.location.origin;
-  // }
-  // console.log(hostPort);
+  let hostPort;
+  if (typeof window !== "undefined") {
+    hostPort = window.location.origin;
+  }
+  console.log(hostPort);
   console.log(session, status);
 
   if (status === "loading") return <div>loading...</div>;

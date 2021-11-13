@@ -14,7 +14,7 @@ const AdminSiteLayout = ({ children }) => {
   return (
     <div>
       <NavBar navButtons={navButtons} />
-      <Header />
+      <Header session={session} status={status} />
       {session && <main className="p-10">{children}</main>}
     </div>
   );
