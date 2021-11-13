@@ -17,6 +17,8 @@
     "graphql": "^15.6.1",
     "graphql-request": "^3.6.0",
     "next": "11.1.2",
+    "next-absolute-url": "^1.2.2",
+    "next-auth": "^4.0.0-beta.6",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "swr": "^1.0.1"

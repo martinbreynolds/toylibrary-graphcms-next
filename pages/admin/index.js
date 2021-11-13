@@ -12,6 +12,7 @@ export default function Admin() {
     </div>
   );
 }
+
 import AdminSiteLayout from "../../components/layouts/adminSiteLayout";
 
 Admin.getLayout = function getLayout(page) {
