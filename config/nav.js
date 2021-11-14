@@ -1,8 +1,3 @@
-const navButtons = [
-  {
-    label: "Sign In",
-    path: "/admin",
-  },
-];
+const navButtons = [];
 
 export default navButtons;

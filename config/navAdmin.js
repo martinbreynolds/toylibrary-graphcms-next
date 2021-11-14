@@ -19,10 +19,6 @@ const navAdminButtons = [
     label: "Return a Toy",
     path: "/admin/return",
   },
-  {
-    label: "Sign Out",
-    path: "/",
-  },
 ];
 
 export default navAdminButtons;
