@@ -11,10 +11,18 @@ export default function Home() {
   if (!data) return <div>loading...</div>;
 
   return (
-    <>
-      <h1>Welcome</h1>
-      <Link href="/toys">See Toys</Link>
-    </>
+    <div>
+      <p className="z-50">dfashfgashj</p>
+      <p className="z-50">dfashfgashj</p>
+      <p className="z-50">dfashfgashj</p>
+      <p className="z-50">dfashfgashj</p>
+      <p className="z-50">dfashfgashj</p>
+      <p className="z-50">dfashfgashj</p>
+      <p className="z-50">dfashfgashj</p>
+
+      {/* <h1>Welcome</h1>
+      <Link href="/toys">See Toys</Link> */}
+    </div>
   );
 }
 

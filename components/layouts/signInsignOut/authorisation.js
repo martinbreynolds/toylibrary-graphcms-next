@@ -14,23 +14,23 @@ const Authorisation = ({ session, status }) => {
   if (status === "loading") return <div>loading...</div>;
 
   return (
-    <div className=" text-center p-2">
+    <>
       {session ? (
         <button
-          className=" px-4 py-1 border-2 border-teal text-teal rounded-lg"
+          className=" px-4 py-1 border-2 mx-2 bg-plum border-white text-white rounded-lg"
           onClick={() => signOut(null, { callbackUrl: `/` })}
         >
           Sign Out
         </button>
       ) : (
         <button
-          className=" px-4 py-1 border-2 border-teal text-teal rounded-lg"
+          className="mx-2 px-4 py-1 border-2 bg-plum border-white text-white rounded-lg"
           onClick={() => signIn(null, { callbackUrl: `${hostPort}/admin` })}
         >
-          Sign in...
+          Admin
         </button>
       )}
-    </div>
+    </>
   );
 };
 

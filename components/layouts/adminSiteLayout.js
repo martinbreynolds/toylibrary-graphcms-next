@@ -3,7 +3,7 @@ import NavBar from "./navigation/navBar";
 import { getSession, useSession, signIn } from "next-auth/react";
 import navButtons from "../../config/navAdmin";
 import { useRouter } from "next/dist/client/router";
-import Authorisation from "./authorisation";
+import Authorisation from "./signInsignOut/authorisation";
 
 const AdminSiteLayout = ({ children }) => {
   const router = useRouter();
@@ -14,10 +14,7 @@ const AdminSiteLayout = ({ children }) => {
   if (!isUser) router.push("./");
   return (
     <div>
-      <Authorisation session={session} status={status} />
-      <NavBar navButtons={navButtons} />
       <Header session={session} status={status} />
-
       {session && <main className="p-10">{children}</main>}
     </div>
   );

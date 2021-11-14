@@ -1,13 +1,19 @@
-const Header = () => {
+import Authorisation from "./signInsignOut/authorisation";
+import Image from "next/image";
+import NavBar from "./navigation/navBar";
+import navButtons from "../../config/nav";
+
+const Header = ({ session, status }) => {
   return (
-    <div className="font-sans bg-white flex lg:flex-row flex-col lg:justify-between uppercase p-3">
-      <h1 className="text-white lg:bg-white lg:text-plum bg-plum rounded-2xl p-2 lg:ml-6 my-auto text-xl sm:text-4xl lg:text-6xl lg:text-left text-center font-black">
+    <div className="mx-10 my-2 flex flex-row justify-between">
+      <p className="text-plum font-extrabold align-middle text-5xl">
         Sensory Toy Library
-      </h1>
+      </p>
+      <NavBar navButtons={navButtons} session={session} status={status} />
       <img
         alt="Unique Ways Logo"
-        className="w-screen lg:w-1/5 p-3 self-center"
-        src="https://www.uniqueways.org.uk/wp-content/themes/unique_ways/images/logo.png"
+        className=" h-12"
+        src="https://www.uniqueways.org.uk/wp-content/themes/unique_ways/images/logo_footer.png"
       />
     </div>
   );

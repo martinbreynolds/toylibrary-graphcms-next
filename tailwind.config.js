@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
@@ -8,6 +10,9 @@ module.exports = {
         teal: "#0B7978",
         orange: "#F37337",
         gray: "#646464",
+      },
+      fontFamily: {
+        sans: ["Roboto"],
       },
     },
   },
