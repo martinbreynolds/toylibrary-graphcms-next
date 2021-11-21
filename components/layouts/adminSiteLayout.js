@@ -1,9 +1,8 @@
-import Header from "./header";
+import Header from "./Global/Header/header";
 import NavBar from "./navigation/navBar";
 import { getSession, useSession, signIn } from "next-auth/react";
-import navButtons from "../../config/navAdmin";
 import { useRouter } from "next/dist/client/router";
-import Authorisation from "./signInsignOut/authorisation";
+import Footer from "./Global/Footer/footer";
 
 const AdminSiteLayout = ({ children }) => {
   const router = useRouter();
@@ -15,7 +14,8 @@ const AdminSiteLayout = ({ children }) => {
   return (
     <div>
       <Header session={session} status={status} />
-      {session && <main className="p-10">{children}</main>}
+      {session && <main className="p-10 dark:bg-gray">{children}</main>}
+      <Footer />
     </div>
   );
 };

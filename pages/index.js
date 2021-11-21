@@ -12,17 +12,12 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <Hero toys={data.toys} />
-        <div className="h-6 bg-teal my-4 rounded-xl"></div>
-        <Categories />
-        <div className="h-6 bg-teal my-4 rounded-xl"></div>
-      </div>
+      <div></div>
     </>
   );
 }
 
-import Layout from "../components/layouts/siteLayout";
+import Layout from "../components/layouts/SiteLayout/siteLayout";
 import Categories from "../components/categories";
 
 Home.getLayout = function getLayout(page) {
