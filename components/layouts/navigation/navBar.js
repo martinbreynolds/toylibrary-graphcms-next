@@ -11,7 +11,7 @@ export default function NavBar({ session, status }) {
         {session ? (
           <>
             {navAdminLinks.map((button) => (
-              <Link key={button.id} href={button.path} passHref>
+              <Link key={button.path} href={button.path} passHref>
                 <button className="px-4 py-1 mx-2 border-2 bg-white border-plum text-plum rounded-lg">
                   {button.label}
                 </button>
