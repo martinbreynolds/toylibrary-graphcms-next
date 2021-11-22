@@ -19,13 +19,13 @@ export default async function fetchData(_req, res) {
       }
     `;
 
-    const data = await graphQLClient.request(query);
+    const categoryData = await graphQLClient.request(query);
 
-    res.status(200).json(data);
+    res.status(200).json(categoryData);
 
     return {
       props: {
-        data,
+        categoryData,
       },
     };
   } catch (error) {
