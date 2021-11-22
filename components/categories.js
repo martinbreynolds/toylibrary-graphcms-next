@@ -3,11 +3,6 @@ import toyCategories from "../config/toyCategories";
 const Categories = () => {
   return (
     <div className="mt-6">
-      <h2 className=" text-teal text-3xl font-bold">Toy categories</h2>
-      <p>
-        lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit
-        amet
-      </p>
       <div className="grid grid-cols-4 gap-3 ">
         {toyCategories.map((category) => (
           <div

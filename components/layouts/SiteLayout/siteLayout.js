@@ -9,7 +9,7 @@ const SiteLayout = ({ children }) => {
   console.log(children.type.name);
   const { data: session, status } = useSession();
   return (
-    <div className="dark:bg-gray">
+    <div className="dark:bg-darkGray bg-white">
       <div>
         <Header session={session} status={status} />
       </div>
@@ -18,7 +18,7 @@ const SiteLayout = ({ children }) => {
       ) : (
         <nav className="bg-plum dark:bg-darkGray text-white flex-row flex h-14 p-3"></nav>
       )}
-      <main className="p-10 dark:bg-gray">{children}</main>
+      <main className="p-3 dark:bg-gray">{children}</main>
       <Footer />
     </div>
   );

@@ -5,7 +5,7 @@ import Authorisation from "./signInsignOut/authorisation";
 const Header = ({ session, status }) => {
   return (
     <>
-      <div>
+      <div className="dark:bg-darkGray">
         <Authorisation session={session} status={status} />
         <div className="flex flex-row w-screen p-3 justify-between">
           <div className=" flex flex-col">
