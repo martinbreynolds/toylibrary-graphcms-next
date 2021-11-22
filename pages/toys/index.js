@@ -10,15 +10,17 @@ export default function ToyHome() {
   const [category, setCategory] = useState("-- Categories --");
   const [search, setSearch] = useState("");
   const { data: data, error } = useSWR("/api/fetchData", fetcher);
-  const { data: categoryData, categoryError } = useSWR(
-    "/api/fetchEnums",
-    fetcher
-  );
-  if (error || categoryError) return <div>failed to load</div>;
-  if (!data || !categoryData) return <div>loading...</div>;
-  const categoryDataValues = categoryData.__type.enumValues;
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
   const toys = data.toys;
-  console.log(category, search, categoryDataValues, toys);
+  console.log(category, search, toys);
+
+  let categories = data.toys.map((a) => a.toyCategory[0]);
+  let uniqueCategories = [...new Set(categories)];
+  let categoriesObject = [];
+
+  console.log(categoriesObject);
 
   let filterBySearch = [];
   let filterByCategory = [];
@@ -41,8 +43,24 @@ export default function ToyHome() {
       toy.name.toLowerCase().includes(search.toLowerCase())
     );
   }
+  let total = 0;
 
-  console.log(filterByCategory, filterBySearch, filtered);
+  for (let i = 0; i < uniqueCategories.length; i++) {
+    let count = filterBySearch.filter(
+      (obj) => obj.toyCategory[0] === uniqueCategories[i]
+    ).length;
+    total = total + count;
+    categoriesObject.push({ name: uniqueCategories[i], number: count });
+  }
+
+  console.log(
+    categories,
+    total,
+    uniqueCategories,
+    filterByCategory,
+    filterBySearch,
+    filtered
+  );
   return (
     <>
       <nav className="bg-plum dark:bg-darkGray text-white flex-col flex p-3">
@@ -64,10 +82,16 @@ export default function ToyHome() {
             className="bg-plum dark:bg-darkGray text-white border-2 p-2 rounded-lg mb-2 w-full"
             onChange={(event) => setCategory(event.target.value)}
           >
-            <option>-- Categories --</option>
-            {categoryDataValues.map((value) => {
+            <option label={`-- Categories -- Total Items: (${total})`}>
+              -- Categories --
+            </option>
+            {categoriesObject.map((value) => {
               return (
-                <option key={value.name} value={value.name} label={value.name}>
+                <option
+                  key={value.name}
+                  value={value.name}
+                  label={`${value.name} (${value.number})`}
+                >
                   {value.name}
                 </option>
               );
