@@ -10,17 +10,19 @@ export default function ToyHome() {
   const [category, setCategory] = useState("-- Categories --");
   const [search, setSearch] = useState("");
   const { data: data, error } = useSWR("/api/fetchData", fetcher);
+  const { data: categoryData, categoryError } = useSWR(
+    "/api/fetchEnums",
+    fetcher
+  );
 
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  if (error || categoryError) return <div>failed to load</div>;
+  if (!data || !categoryData) return <div>loading...</div>;
+  const categoryDataValues = categoryData.__type.enumValues;
   const toys = data.toys;
-  console.log(category, search, toys);
 
-  let categories = data.toys.map((a) => a.toyCategory[0]);
+  let categories = categoryDataValues.map((a) => a.name);
   let uniqueCategories = [...new Set(categories)];
   let categoriesObject = [];
-
-  console.log(categoriesObject);
 
   let filterBySearch = [];
   let filterByCategory = [];
@@ -53,14 +55,6 @@ export default function ToyHome() {
     categoriesObject.push({ name: uniqueCategories[i], number: count });
   }
 
-  console.log(
-    categories,
-    total,
-    uniqueCategories,
-    filterByCategory,
-    filterBySearch,
-    filtered
-  );
   return (
     <>
       <nav className="bg-plum dark:bg-darkGray text-white flex-col flex p-3">
