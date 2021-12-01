@@ -18,7 +18,7 @@ export default function NavBar({ session, status }) {
       <MobileNav session={session} status={status} />
       {/* End of Mobile Nav */}
       {/* nav above md:  */}
-      <nav className="hidden md:flex">
+      <nav className="hidden lg:flex">
         <LargeNav session={session} status={status} />
       </nav>
     </div>

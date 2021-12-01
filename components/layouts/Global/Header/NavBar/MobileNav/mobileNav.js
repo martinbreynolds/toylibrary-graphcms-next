@@ -17,7 +17,7 @@ export default function MobileNav({ session, status }) {
   console.log(`'${router.pathname}'`);
   return (
     <>
-      <div className="md:hidden flex flex-row p-3 justify-between">
+      <div className="lg:hidden flex flex-row p-3 justify-between">
         {/* Hamburger */}
         {/* Make New Hamburger that animates on click */}
 
@@ -148,6 +148,7 @@ export default function MobileNav({ session, status }) {
                 </Link>
               </button>
             ))}
+
             <Authorisation session={session} status={status} />
           </>
         )}

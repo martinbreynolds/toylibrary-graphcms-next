@@ -17,14 +17,11 @@ export default function LargeNav({ session, status }) {
   console.log(`'${router.pathname}'`);
   return (
     <>
-      <div className="flex flex-col p-3 justify-between w-full">
-        <div className="flex flex-row mx-auto mb-2">
-          <div className="my-auto">
-            <text className="mr-12  text-white dark:text-lightGray font-extrabold text-2xl">
-              Sensory Library
-            </text>
-          </div>
-          <div className="fill-current text-orange">
+      {/* Whole Bar */}
+      <div className="flex flex-row p-3 justify-between w-full">
+        {/* Holding for Toy Image and text */}
+        <div className="flex flex-row mx-auto my-auto mb-2">
+          <div className="fill-current text-orange ">
             <svg
               className="h-12"
               stroke="currentColor"
@@ -78,7 +75,11 @@ export default function LargeNav({ session, status }) {
               </g>
             </svg>
           </div>
+          <text className="my-auto pl-6 text-white dark:text-lightGray font-extrabold text-2xl">
+            Sensory Library
+          </text>
         </div>
+
         <nav className={`flex flex-row bg-plum dark:bg-darkGray mx-auto `}>
           {session ? (
             <>
@@ -132,6 +133,11 @@ export default function LargeNav({ session, status }) {
             </>
           )}
         </nav>
+        <img
+          alt="Unique Ways Logo"
+          className="p-3 bg-lightGray h-16 rounded-md border-white mx-auto border-2 border-white"
+          src="./images/logo.png"
+        />
       </div>
     </>
   );
