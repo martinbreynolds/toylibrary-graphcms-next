@@ -11,6 +11,7 @@ module.exports = {
         orange: "#F37337",
         gray: "#646464",
         darkGray: "#333333",
+        lightGray: "#F9FAFB",
       },
       fontFamily: {
         sans: ["Roboto"],
@@ -18,7 +19,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: { backgroundColor: ["active"] },
+    extend: { backgroundColor: ["active"], color: ["active"] },
   },
   plugins: [],
 };

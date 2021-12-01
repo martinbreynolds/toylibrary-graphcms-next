@@ -19,7 +19,7 @@ const Authorisation = ({ session, status }) => {
     <>
       {session ? (
         <div
-          className="text-white font-medium text-left px-3 py-1  bg-gray"
+          className="text-white font-medium text-left px-3 py-1 dark:bg-darkGray  bg-plum"
           onClick={() => signOut(null, { callbackUrl: `/` })}
         >
           <FontAwesomeIcon
@@ -30,7 +30,7 @@ const Authorisation = ({ session, status }) => {
         </div>
       ) : (
         <div
-          className="text-white font-medium text-left px-3 py-1  bg-gray"
+          className="text-white font-medium text-left px-3 py-1 dark:bg-darkGray  bg-plum"
           onClick={() => signIn(null, { callbackUrl: `${hostPort}/admin` })}
         >
           <FontAwesomeIcon

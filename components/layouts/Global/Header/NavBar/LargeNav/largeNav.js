@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
 
-export default function MobileNav({ session, status }) {
+export default function LargeNav({ session, status }) {
   const [hidden, setHidden] = useState("hidden");
   const router = useRouter();
   const hiddenFunction = () => {
@@ -17,43 +17,23 @@ export default function MobileNav({ session, status }) {
   console.log(`'${router.pathname}'`);
   return (
     <>
-      <div className="md:hidden flex flex-row p-3 justify-between">
-        {/* Hamburger */}
-        {/* Make New Hamburger that animates on click */}
-
-        <button
-          className={`outline-none fill-current text-orange `}
-          onClick={hiddenFunction}
-        >
-          <svg
-            className="h-12 w-auto"
-            x-show="!showMenu"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="3"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-
-        <div className="mx-auto my-auto">
-          <text className=" text-white dark:text-lightGray font-extrabold text-2xl">
-            Sensory Library
-          </text>
-        </div>
-        <div className="fill-current text-orange">
-          <svg
-            className="h-12"
-            stroke="currentColor"
-            strokeWidth="3"
-            viewBox="0 0 375.165 375.165"
-          >
-            <g>
-              <path
-                d="M373.423,327.337c0.512-0.664,0.926-1.431,1.315-2.484c0.188-0.597,0.316-1.218,0.378-1.924l0.048-149.221l-57.518,0.012
+      <div className="flex flex-col p-3 justify-between w-full">
+        <div className="flex flex-row mx-auto mb-2">
+          <div className="my-auto">
+            <text className="mr-12  text-white dark:text-lightGray font-extrabold text-2xl">
+              Sensory Library
+            </text>
+          </div>
+          <div className="fill-current text-orange">
+            <svg
+              className="h-12"
+              stroke="currentColor"
+              strokeWidth="3"
+              viewBox="0 0 375.165 375.165"
+            >
+              <g>
+                <path
+                  d="M373.423,327.337c0.512-0.664,0.926-1.431,1.315-2.484c0.188-0.597,0.316-1.218,0.378-1.924l0.048-149.221l-57.518,0.012
 		l11.618-12.58l0.523-0.648c0.499-0.661,0.913-1.428,1.303-2.476c0.189-0.594,0.316-1.218,0.378-1.927l0.042-149.224L182.638,6.896
 		c-0.798,0.024-1.577,0.164-2.649,0.518c-0.78,0.292-1.516,0.712-2.223,1.272l-38.191,35.235c-0.229,0.213-0.442,0.438-0.646,0.673
 		h-2.016V173.72l-91.191,0.021c-0.804,0.024-1.583,0.167-2.67,0.518c-0.764,0.292-1.483,0.703-2.162,1.233L2.63,210.785
@@ -65,14 +45,14 @@ export default function MobileNav({ session, status }) {
 		 M294.508,176.826l-2.747,3.069v-3.069v-3.1V60.8l28.06-32.111V148.53l-22.536,25.196L294.508,176.826z M16.523,351.779V227.962
 		h123.82v123.816H16.523z M154.585,229.156l24.198-27.693l2.725-3.117l1.136-1.304v1.304v3.117v9.907v105.513l-2.083,2.326
 		l-25.976,29.039V229.156z M335.409,229.156l28.059-32.114v119.841l-28.059,31.365V229.156z"
-              />
-              <path
-                d="M89.852,237.541H66.012c-1.108,0-2.131,0.585-2.694,1.547l-8.199,14.029c-0.566,0.969-0.566,2.156-0.012,3.124
+                />
+                <path
+                  d="M89.852,237.541H66.012c-1.108,0-2.131,0.585-2.694,1.547l-8.199,14.029c-0.566,0.969-0.566,2.156-0.012,3.124
 		c0.557,0.962,1.589,1.564,2.707,1.564h13.993v81.784c0,1.729,1.397,3.117,3.118,3.117h14.934c1.72,0,3.118-1.389,3.118-3.117
 		v-98.931C92.969,238.929,91.578,237.541,89.852,237.541z"
-              />
-              <path
-                d="M179.103,173.708c0.536,1.017,1.571,1.689,2.731,1.689h12.769h27.042h26.646c1.193,0,2.186-0.685,2.709-1.662
+                />
+                <path
+                  d="M179.103,173.708c0.536,1.017,1.571,1.689,2.731,1.689h12.769h27.042h26.646c1.193,0,2.186-0.685,2.709-1.662
 		c0.238-0.438,0.408-0.917,0.408-1.456v-14.036c0-1.72-1.4-3.117-3.117-3.117h-30.13l11.04-13.062
 		c4.396-5.194,7.897-9.526,10.711-13.238c2.886-3.803,5.108-7.164,6.619-9.953c1.802-3.255,3.026-6.583,3.781-9.95
 		c0.56-2.444,0.901-4.907,0.901-7.383c0-9.322-3.447-17.248-10.218-23.55c-6.668-6.257-15.016-9.429-24.808-9.429
@@ -81,9 +61,9 @@ export default function MobileNav({ session, status }) {
 		c2.637,2.533,3.915,5.593,3.915,9.353c0,2.153-0.773,4.652-2.234,7.447c-0.317,0.591-0.621,1.185-0.999,1.809
 		c-1.133,1.937-2.825,4.399-5.023,7.319c-2.259,3.005-5.072,6.564-8.403,10.656l-34.352,41.589
 		c-0.768,0.928-0.929,2.219-0.411,3.312C179.027,173.653,179.079,173.671,179.103,173.708z"
-              />
-              <path
-                d="M258.801,344.314c10.126,0,18.596-3.13,25.173-9.311c6.625-6.229,9.985-14.321,9.985-24.058
+                />
+                <path
+                  d="M258.801,344.314c10.126,0,18.596-3.13,25.173-9.311c6.625-6.229,9.985-14.321,9.985-24.058
 		c0-10.291-3.458-18.256-10.284-23.718c5.767-5.377,8.689-12.391,8.689-20.94c0-8.89-3.094-16.276-9.195-21.945
 		c-6.04-5.663-13.895-8.537-23.339-8.537c-9.341,0-16.788,2.46-22.152,7.319c-5.304,4.799-8.817,12.288-10.468,22.274
 		c-0.146,0.901,0.109,1.82,0.706,2.526c0.585,0.701,1.456,1.097,2.375,1.097h14.857c1.474,0,2.734-1.023,3.045-2.454
@@ -94,64 +74,65 @@ export default function MobileNav({ session, status }) {
 		c-4.043,0-7.185-1.005-9.596-3.063c-2.418-2.07-3.909-5.047-4.562-9.115c-0.243-1.51-1.546-2.618-3.074-2.618h-14.42
 		c-0.883,0-1.711,0.372-2.302,1.023c-0.597,0.651-0.889,1.522-0.804,2.399c0.694,6.965,2.394,12.562,5.055,16.659
 		C236.028,339.418,245.825,344.314,258.801,344.314z"
-              />
-            </g>
-          </svg>
+                />
+              </g>
+            </svg>
+          </div>
         </div>
+        <nav className={`flex flex-row bg-plum dark:bg-darkGray mx-auto `}>
+          {session ? (
+            <>
+              {navAdminLinks.map((button) => (
+                <button
+                  key={button.label}
+                  className={
+                    new String(router.pathname).valueOf() ==
+                    new String(button.path).valueOf()
+                      ? " border-orange border-b-2 border-t-2 "
+                      : ""
+                  }
+                >
+                  <Link href={button.path} passHref>
+                    <div className="text-white font-medium text-left px-1 py-1 ">
+                      <FontAwesomeIcon
+                        className="text-plum dark:text-orange mr-2"
+                        icon={faGripLinesVertical}
+                      />
+                      {button.label}
+                    </div>
+                  </Link>
+                </button>
+              ))}
+              <Authorisation session={session} status={status} />
+            </>
+          ) : (
+            <>
+              {navLinks.map((button) => (
+                <button
+                  key={button.label}
+                  className={
+                    new String(router.pathname).valueOf() ==
+                    new String(button.path).valueOf()
+                      ? " border-orange border-b-2 border-t-2 "
+                      : ""
+                  }
+                >
+                  <Link href={button.path} passHref>
+                    <div className="text-white font-medium text-left px-3 py-1 ">
+                      <FontAwesomeIcon
+                        className="text-plum dark:text-orange mr-2"
+                        icon={faGripLinesVertical}
+                      />
+                      {button.label}
+                    </div>
+                  </Link>
+                </button>
+              ))}
+              <Authorisation session={session} status={status} />
+            </>
+          )}
+        </nav>
       </div>
-      <nav className={`flex flex-col bg-plum dark:bg-gray w-screen ${hidden}`}>
-        {session ? (
-          <>
-            {navAdminLinks.map((button) => (
-              <button
-                key={button.label}
-                className={
-                  new String(router.pathname).valueOf() ==
-                  new String(button.path).valueOf()
-                    ? "bg-orange "
-                    : ""
-                }
-              >
-                <Link href={button.path} passHref>
-                  <div className="text-white font-medium text-left px-3 py-1 ">
-                    <FontAwesomeIcon
-                      className="text-plum dark:text-orange mr-2"
-                      icon={faGripLinesVertical}
-                    />
-                    {button.label}
-                  </div>
-                </Link>
-              </button>
-            ))}
-            <Authorisation session={session} status={status} />
-          </>
-        ) : (
-          <>
-            {navLinks.map((button) => (
-              <button
-                key={button.label}
-                className={
-                  new String(router.pathname).valueOf() ==
-                  new String(button.path).valueOf()
-                    ? "bg-orange"
-                    : ""
-                }
-              >
-                <Link href={button.path} passHref>
-                  <div className="text-white font-medium text-left px-3 py-1 ">
-                    <FontAwesomeIcon
-                      className="text-orange mr-2"
-                      icon={faGripLinesVertical}
-                    />
-                    {button.label}
-                  </div>
-                </Link>
-              </button>
-            ))}
-            <Authorisation session={session} status={status} />
-          </>
-        )}
-      </nav>
     </>
   );
 }
