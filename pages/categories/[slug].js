@@ -1,5 +1,4 @@
 import { GraphQLClient, gql } from "graphql-request";
-import Link from "next/link";
 
 export const getServerSideProps = async (pageContext) => {
   const endpoint = process.env.ENDPOINT;
@@ -9,27 +8,26 @@ export const getServerSideProps = async (pageContext) => {
     },
   });
 
-  const pageSlug = pageContext.query.slug;
+  const pageSlug = [pageContext.query.slug];
   console.log(pageSlug);
 
   const query = gql`
-    query($pageSlug: String!) {
-      toy(where: { slug: $pageSlug }) {
+    query($pageSlug: [Category!]) {
+      toys(where: { toyCategory: $pageSlug }) {
         slug
         name
         description
         id
         borrowed
+        toyCategory
+        toyImage {
+          url
+        }
         member {
           firstName
           lastName
           email
         }
-      }
-      members {
-        email
-        firstName
-        lastName
       }
     }
   `;
@@ -39,34 +37,25 @@ export const getServerSideProps = async (pageContext) => {
   };
 
   const data = await graphQLClient.request(query, variables);
-  const toy = data.toy;
-  const members = data.members;
+  const toys = data.toys;
 
   return {
     props: {
-      toy,
-      members,
+      toys,
     },
   };
 };
 
-const Toy = ({ toy }) => {
-  return (
-    <div>
-      <a href={toy.slug}>{toy.name}</a>
-      <p>{toy.description}</p>
-
-      <p>
-        <Link href={`/toys`}>Back</Link>
-      </p>
-    </div>
-  );
+const Category = ({ toys }) => {
+  console.log(toys);
+  return <ToyCard toys={toys} />;
 };
 
-export default Toy;
+export default Category;
 
 import Layout from "../../components/layouts/SiteLayouts/siteLayout";
+import ToyCard from "../../components/toys/toyCard";
 
-Toy.getLayout = function getLayout(page) {
+Category.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };

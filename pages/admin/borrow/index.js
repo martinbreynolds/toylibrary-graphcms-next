@@ -1,6 +1,6 @@
 import { GraphQLClient, gql } from "graphql-request";
 import BorrowMemberSearch from "../../../components/borrowing/borrow";
-import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
+import AdminSiteLayout from "../../../components/layouts/SiteLayouts/adminSiteLayout";
 
 export const getServerSideProps = async () => {
   const endpoint = process.env.ENDPOINT;

@@ -1,7 +1,7 @@
-import Header from "./Global/Header/header";
+import Header from "../Global/Header/header";
 import { getSession, useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/dist/client/router";
-import Footer from "./Global/Footer/footer";
+import Footer from "../Global/Footer/footer";
 
 const AdminSiteLayout = ({ children }) => {
   const router = useRouter();

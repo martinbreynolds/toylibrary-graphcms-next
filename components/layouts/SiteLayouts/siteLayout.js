@@ -8,7 +8,7 @@ const SiteLayout = ({ children }) => {
   const { data, error } = useSWR("/api/fetchData", fetcher);
   const { data: session, status } = useSession();
   return (
-    <div className=" ">
+    <div className=" bg-lightGray dark:bg-gray">
       <div className="sticky top-0 z-10 dark:bg-darkGray bg-plum">
         <Header session={session} status={status} />
       </div>

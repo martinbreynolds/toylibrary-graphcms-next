@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
+import AdminSiteLayout from "../../../components/layouts/SiteLayouts/adminSiteLayout";
 import MemberCard from "../../../components/members/memberCard";
 
 export const getServerSideProps = async (pageContext) => {

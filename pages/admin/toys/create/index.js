@@ -1,4 +1,4 @@
-import AdminSiteLayout from "../../../../components/layouts/adminSiteLayout";
+import AdminSiteLayout from "../../../../components/layouts/SiteLayouts/adminSiteLayout";
 import AddToy from "../../../../components/toys/addToy";
 
 export default function CreateToy() {

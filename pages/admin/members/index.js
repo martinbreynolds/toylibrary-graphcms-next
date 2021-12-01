@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import MemberList from "../../../components/members/memberList";
 import AddMember from "../../../components/members/addMember";
-import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
+import AdminSiteLayout from "../../../components/layouts/SiteLayouts/adminSiteLayout";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 

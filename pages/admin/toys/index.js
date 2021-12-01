@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
-import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
+import AdminSiteLayout from "../../../components/layouts/SiteLayouts/adminSiteLayout";
 import useSWR from "swr";
 import ToyCardAdmin from "../../../components/toys/toyCardAdmin";
 

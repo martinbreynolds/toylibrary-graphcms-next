@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import Link from "next/link";
-import Hero from "../components/layouts/hero";
 import CategoryOverview from "../components/categories/categoryOverview";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -26,7 +25,7 @@ export default function Home() {
             About our Toy Library
           </h3>
           <div className="h-2 bg-plum my-4"></div>
-          <p className="text-darkGray dark:text-white">
+          <p className="text-darkGray dark:text-lightGray">
             The family room at Unique Ways HQ features our sensory aid library –
             which is exactly what it sounds like. Your child can try out as many
             of our aids as they like, and members can take them home for a small
@@ -49,8 +48,7 @@ export default function Home() {
   );
 }
 
-import Layout from "../components/layouts/SiteLayout/siteLayout";
-import Categories from "../components/categories";
+import Layout from "../components/layouts/SiteLayouts/siteLayout";
 import ToyCarousel from "../components/carousel/toyCarousel";
 
 Home.getLayout = function getLayout(page) {

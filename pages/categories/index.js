@@ -1,8 +1,16 @@
+import toyCategories from "../../config/toyCategories";
+
 export default function CategoriesHome() {
-  return <p>This is the categories home page</p>;
+  console.log(toyCategories);
+  return (
+    <>
+      <CategoryOverview />
+    </>
+  );
 }
 
-import Layout from "../../components/layouts/SiteLayout/siteLayout";
+import Layout from "../../components/layouts/SiteLayouts/siteLayout";
+import CategoryOverview from "../../components/categories/categoryOverview";
 
 CategoriesHome.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;

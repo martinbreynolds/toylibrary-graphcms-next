@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import AdminSiteLayout from "../../../components/layouts/adminSiteLayout";
+import AdminSiteLayout from "../../../components/layouts/SiteLayouts/adminSiteLayout";
 
 export const getServerSideProps = async (pageContext) => {
   const pageSlug = pageContext.query.slug;

@@ -13,7 +13,7 @@ export default function Admin() {
   );
 }
 
-import AdminSiteLayout from "../../components/layouts/adminSiteLayout";
+import AdminSiteLayout from "../../components/layouts/SiteLayouts/adminSiteLayout";
 
 Admin.getLayout = function getLayout(page) {
   return <AdminSiteLayout>{page}</AdminSiteLayout>;
