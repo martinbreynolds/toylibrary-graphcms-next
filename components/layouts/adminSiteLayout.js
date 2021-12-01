@@ -1,5 +1,4 @@
 import Header from "./Global/Header/header";
-import NavBar from "./navigation/navBar";
 import { getSession, useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/dist/client/router";
 import Footer from "./Global/Footer/footer";
@@ -12,9 +11,11 @@ const AdminSiteLayout = ({ children }) => {
   if (status === "loading") return <div>loading...</div>;
   if (!isUser) router.push("./");
   return (
-    <div>
-      <Header session={session} status={status} />
-      {session && <main className="p-10 dark:bg-gray">{children}</main>}
+    <div className="dark:bg-darkGray bg-white">
+      <div className="sticky top-0 overflow-hidden z-10">
+        <Header session={session} status={status} />
+      </div>
+      {session && <main className="p-3 dark:bg-gray">{children}</main>}
       <Footer />
     </div>
   );

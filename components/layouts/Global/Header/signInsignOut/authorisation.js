@@ -1,5 +1,7 @@
 import { useSession } from "next-auth/react";
 import { signIn, signOut } from "next-auth/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
 
 const Authorisation = ({ session, status }) => {
   // const { data: session, status } = useSession();
@@ -14,25 +16,31 @@ const Authorisation = ({ session, status }) => {
   if (status === "loading") return <div>loading...</div>;
 
   return (
-    <div className="bg-plum w-full px-3 py-3 dark:bg-darkGray">
-      <div className="flex justify-end text-xs">
-        {session ? (
-          <button
-            className=" px-4 py-1 border-2 mx-2 bg-plum dark:bg-darkGray border-white text-white shadow-sm rounded-xl uppercase"
-            onClick={() => signOut(null, { callbackUrl: `/` })}
-          >
-            Sign Out
-          </button>
-        ) : (
-          <button
-            className="mx-2 px-4 py-1 shadow-sm border-2 bg-plum dark:bg-darkGray border-white text-white rounded-xl uppercase"
-            onClick={() => signIn(null, { callbackUrl: `${hostPort}/admin` })}
-          >
-            Admin
-          </button>
-        )}
-      </div>
-    </div>
+    <>
+      {session ? (
+        <div
+          className="text-white font-medium text-left px-3 py-1  bg-gray"
+          onClick={() => signOut(null, { callbackUrl: `/` })}
+        >
+          <FontAwesomeIcon
+            className="text-teal mr-2"
+            icon={faGripLinesVertical}
+          />
+          Sign Out
+        </div>
+      ) : (
+        <div
+          className="text-white font-medium text-left px-3 py-1  bg-gray"
+          onClick={() => signIn(null, { callbackUrl: `${hostPort}/admin` })}
+        >
+          <FontAwesomeIcon
+            className="text-teal mr-2"
+            icon={faGripLinesVertical}
+          />
+          Admin
+        </div>
+      )}
+    </>
   );
 };
 
