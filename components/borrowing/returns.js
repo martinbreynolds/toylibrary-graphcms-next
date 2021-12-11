@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import ReturnToyCard from "./returnToyCard";
 
 export default function Returns({ members, toys }) {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function Returns({ members, toys }) {
 
   return (
     <div>
+      <ReturnToyCard toys={toys} />
       {toys.map((toy) => {
         return (
           <div key={toy.id}>
