@@ -1,15 +1,14 @@
-import useSWR from "swr";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useSWR, { useSWRConfig } from "swr";
 import { useState } from "react";
 import ToyCard from "../../components/toys/toyCard";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function ToyHome() {
+  const { mutate } = useSWRConfig();
   const [category, setCategory] = useState("-- Categories --");
   const [search, setSearch] = useState("");
-  const { data: data, error } = useSWR("/api/fetchData", fetcher);
+  const { data: data, error, isValidating } = useSWR("/api/fetchData", fetcher);
   const { data: categoryData, categoryError } = useSWR(
     "/api/fetchEnums",
     fetcher
@@ -17,6 +16,7 @@ export default function ToyHome() {
 
   if (error || categoryError) return <div>failed to load</div>;
   if (!data || !categoryData) return <div>loading...</div>;
+  if (isValidating) return <div>validating...</div>;
   const categoryDataValues = categoryData.__type.enumValues;
   const toys = data.toys;
 
@@ -66,7 +66,10 @@ export default function ToyHome() {
             className=" bg-plum dark:bg-darkGray text-white border-2 p-2 rounded-lg mb-2 w-full"
             placeholder="Search..."
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => {
+              setSearch(event.target.value);
+              mutate("api/fetchData");
+            }}
           />
         </div>
         <div className="flex flex-col justify-around">
@@ -74,7 +77,10 @@ export default function ToyHome() {
           <select
             placeholder="Search"
             className="bg-plum dark:bg-darkGray text-white border-2 p-2 rounded-lg mb-2 w-full"
-            onChange={(event) => setCategory(event.target.value)}
+            onChange={(event) => {
+              setCategory(event.target.value);
+              mutate("api/fetchData");
+            }}
           >
             <option label={`-- Categories -- Total Items: (${total})`}>
               -- Categories --
