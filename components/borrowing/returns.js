@@ -20,27 +20,5 @@ export default function Returns({ members, toys }) {
     router.reload(window.location.pathname);
   };
 
-  return (
-    <div>
-      <ReturnToyCard toys={toys} />
-      {toys.map((toy) => {
-        return (
-          <div key={toy.id}>
-            {toy.member && (
-              <div>
-                <img alt={toy.name} src={toy.toyImage.url} />
-                <p value={toy.name}>{toy.name}</p>
-                <p>{toy.description}</p>
-                <form onSubmit={returnToy}>
-                  <button name={toy.id} value={toy.id} type="submit">
-                    Return Toy
-                  </button>
-                </form>
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <ReturnToyCard toys={toys} />;
 }
