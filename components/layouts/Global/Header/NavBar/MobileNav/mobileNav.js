@@ -40,7 +40,7 @@ export default function MobileNav({ session, status }) {
         </button>
 
         <div className="mx-auto my-auto">
-          <text className=" text-white dark:text-lightGray font-extrabold text-2xl">
+          <text className=" text-white font-extrabold text-2xl">
             Sensory Library
           </text>
         </div>
@@ -99,7 +99,7 @@ export default function MobileNav({ session, status }) {
           </svg>
         </div>
       </div>
-      <nav className={`flex flex-col bg-plum dark:bg-gray w-screen ${hidden}`}>
+      <nav className={`flex flex-col bg-plum w-screen ${hidden}`}>
         {session ? (
           <>
             {navAdminLinks.map((button) => (
@@ -115,7 +115,7 @@ export default function MobileNav({ session, status }) {
                 <Link href={button.path} passHref>
                   <div className="text-white font-medium text-left px-3 py-1 ">
                     <FontAwesomeIcon
-                      className="text-plum dark:text-orange mr-2"
+                      className="text-plum mr-2"
                       icon={faGripLinesVertical}
                     />
                     {button.label}

@@ -50,9 +50,11 @@ export default function Home() {
               to enrich your young persons life!
             </h2>
           </h1>
-          <button className="bg-plum hover:bg-teal transition hover:duration-500 hover:scale-105 text-white rounded-lg mt-10 p-3 md:p-5 font-bold text-xl uppercase">
-            See Our Toys
-          </button>
+          <Link href="/toys" passHref>
+            <button className="bg-plum hover:bg-teal transition hover:duration-500 hover:scale-105 text-white rounded-lg mt-10 p-3 md:p-5 font-bold text-xl uppercase">
+              See Our Toys
+            </button>
+          </Link>
         </div>
       </div>
       <div>

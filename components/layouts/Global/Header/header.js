@@ -2,7 +2,7 @@ import NavBar from "./NavBar/navBar";
 
 const Header = ({ session, status }) => {
   return (
-    <header className="bg-lightGray dark:bg-darkGray ">
+    <header className="bg-lightGray ">
       <div className="p-2 lg:hidden">
         <img
           alt="Unique Ways Logo"
