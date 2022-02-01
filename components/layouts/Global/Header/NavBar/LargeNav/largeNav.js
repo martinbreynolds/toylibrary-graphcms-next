@@ -75,12 +75,12 @@ export default function LargeNav({ session, status }) {
               </g>
             </svg>
           </div>
-          <text className="my-auto pl-6 text-white dark:text-lightGray font-extrabold text-2xl">
+          <text className="my-auto pl-6 text-white  font-extrabold text-2xl">
             Sensory Library
           </text>
         </div>
 
-        <nav className={`flex flex-row bg-plum dark:bg-darkGray mx-auto `}>
+        <nav className={`flex flex-row bg-plum  mx-auto `}>
           {session ? (
             <>
               {navAdminLinks.map((button) => (
@@ -121,7 +121,7 @@ export default function LargeNav({ session, status }) {
                   <Link href={button.path} passHref>
                     <div className="text-white font-medium text-left px-3 py-1 ">
                       <FontAwesomeIcon
-                        className="text-plum dark:text-orange mr-2"
+                        className="text-plum  mr-2"
                         icon={faGripLinesVertical}
                       />
                       {button.label}

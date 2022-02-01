@@ -9,7 +9,7 @@ export default function NavBar({ session, status }) {
     hidden === "hidden" ? setHidden("") : setHidden("hidden");
   };
   return (
-    <div className="bg-plum  dark:bg-darkGray border-t-2 border-b-2 border-solid border-gray">
+    <div className="bg-plum ">
       {/* Start of Mobile Nav */}
       <MobileNav session={session} status={status} />
       {/* End of Mobile Nav */}

@@ -1,6 +1,4 @@
 import useSWR from "swr";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import ToyCard from "../../components/toys/toyCard";
 
