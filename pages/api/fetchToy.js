@@ -17,6 +17,10 @@ export default async function fetchMember(req, res) {
           description
           id
           borrowed
+          toyCategory
+          toyImage {
+            url
+          }
           member {
             firstName
             lastName

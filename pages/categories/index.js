@@ -3,9 +3,9 @@ import toyCategories from "../../config/toyCategories";
 export default function CategoriesHome() {
   console.log(toyCategories);
   return (
-    <>
+    <div className="p-5">
       <CategoryOverview />
-    </>
+    </div>
   );
 }
 

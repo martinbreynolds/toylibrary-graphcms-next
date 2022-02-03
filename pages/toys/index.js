@@ -144,76 +144,82 @@ export default function ToyHome() {
     <>
       <div className="bg-plum my-5 text-white flex-col flex p-3">
         <div className="flex flex-row justify-end">
-          <button
-            onClick={hiddenFunction}
-            className=" p-2 hover:bg-orange bg-white text-plum rounded-2xl text-center font-bold"
-          >
-            Filter
-          </button>
+          {hidden === "hidden" ? (
+            <button
+              onClick={hiddenFunction}
+              className=" py-1 px-1 uppercase  hover:bg-orange hover:text-white transition hover:duration-500 hover:transform hover:scale-110 bg-white text-plum rounded-lg text-center font-bold"
+            >
+              Filter
+            </button>
+          ) : (
+            <button
+              onClick={hiddenFunction}
+              className=" py-2 px-2 uppercase  transition hover:duration-500 hover:transform hover:scale-110 bg-orange text-white rounded-lg text-center font-bold"
+            >
+              X
+            </button>
+          )}
         </div>
         {/* Area to hide on click */}
         <div className={hidden}>
-          <div className="grid grid-cols-12">
-            <div className=" col-span-5">
-              <label className="my-auto">Search: </label>
-            </div>
-            <div className=" col-span-2">
-              <label className="my-auto"> Only Show Available? </label>
-            </div>
-            <div className=" col-span-5">
-              <label className="my-auto">Category: </label>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-12">
-            <div className=" col-span-5">
+          <div className="flex flex-col transition duration-500">
+            <div className="">
               {/* Search Area */}
               <div className="flex flex-col justify-around">
-                <input
-                  type="text"
-                  className=" bg-plum  text-white border-2 p-2 rounded-lg mb-2 w-full"
-                  placeholder="Search..."
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                />
+                <div className=" ">
+                  <label className="my-auto font-medium text-lg">
+                    Search:{" "}
+                  </label>
+                  <input
+                    type="text"
+                    className=" bg-plum text-white border-2 p-2 rounded-lg mb-2 w-full"
+                    placeholder="Search..."
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                  />
+                </div>
+                <div className=" "></div>
               </div>
             </div>
-            <div className=" col-span-2">
-              {/* Borrowed? Area */}
-              <div className="flex flex-row justify-left">
-                <input
-                  type="checkbox"
-                  id="accept"
-                  name="accept"
-                  value="yes"
-                  onChange={(event) => setBorrowed(event.target.checked)}
-                />
-              </div>
+
+            <div className="flex flex-col justify-around mb-3">
+              <label className="my-auto font-medium text-lg">Category: </label>
+              <select
+                placeholder="Search"
+                className="bg-plum  text-white border-2 p-2 rounded-lg mb-2 w-full"
+                onChange={(event) => setCategory(event.target.value)}
+              >
+                <option label={`-- Categories -- Total Items: (${total})`}>
+                  -- Categories --
+                </option>
+                {categoriesObject.map((value) => {
+                  return (
+                    <option
+                      key={value.name}
+                      value={value.name}
+                      label={`${value.name} (${value.number})`}
+                    >
+                      {value.name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
-            <div className=" col-span-5">
-              {/* Category Area */}
-              <div className="flex flex-col justify-around">
-                <select
-                  placeholder="Search"
-                  className="bg-plum  text-white border-2 p-2 rounded-lg mb-2 w-full"
-                  onChange={(event) => setCategory(event.target.value)}
-                >
-                  <option label={`-- Categories -- Total Items: (${total})`}>
-                    -- Categories --
-                  </option>
-                  {categoriesObject.map((value) => {
-                    return (
-                      <option
-                        key={value.name}
-                        value={value.name}
-                        label={`${value.name} (${value.number})`}
-                      >
-                        {value.name}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
+
+            <div className="flex flex-row justify-start">
+              <label className="my-auto font-medium text-lg">
+                {" "}
+                Only Show Available?{" "}
+              </label>
+
+              <input
+                className="h-6 w-6 pl-3 ml-3 bg-orange"
+                type="checkbox"
+                id="accept"
+                name="accept"
+                value="yes"
+                onChange={(event) => setBorrowed(event.target.checked)}
+              />
             </div>
           </div>
         </div>

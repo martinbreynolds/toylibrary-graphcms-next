@@ -1,64 +1,65 @@
 import { GraphQLClient, gql } from "graphql-request";
 import Link from "next/link";
+import useSWR from "swr";
 
 export const getServerSideProps = async (pageContext) => {
-  const endpoint = process.env.ENDPOINT;
-  const graphQLClient = new GraphQLClient(endpoint, {
-    headers: {
-      authorization: process.env.GRAPH_CMS_TOKEN,
-    },
-  });
-
   const pageSlug = pageContext.query.slug;
-  console.log(pageSlug);
-
-  const query = gql`
-    query($pageSlug: String!) {
-      toy(where: { slug: $pageSlug }) {
-        slug
-        name
-        description
-        id
-        borrowed
-        member {
-          firstName
-          lastName
-          email
-        }
-      }
-      members {
-        email
-        firstName
-        lastName
-      }
-    }
-  `;
-
-  const variables = {
-    pageSlug,
-  };
-
-  const data = await graphQLClient.request(query, variables);
-  const toy = data.toy;
-  const members = data.members;
 
   return {
     props: {
-      toy,
-      members,
+      pageSlug,
     },
   };
 };
 
-const Toy = ({ toy }) => {
-  return (
-    <div>
-      <a href={toy.slug}>{toy.name}</a>
-      <p>{toy.description}</p>
+async function fetcher(url, pageSlug) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      pageSlug,
+    }),
+  });
+  return res.json();
+}
 
-      <p>
-        <Link href={`/toys`}>Back</Link>
-      </p>
+const Toy = ({ pageSlug }) => {
+  const { data, error } = useSWR(["/api/fetchToy", pageSlug], { fetcher });
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  const toy = data.toy;
+
+  return (
+    <div className="p-5">
+      <div className="flex flex-row justify-between">
+        <h2
+          className="bg-plum text-white p-2 font-black text-2xl rounded-t-xl"
+          href={toy.slug}
+        >
+          {toy.name}
+        </h2>
+        <Link href={`/toys`} passHref>
+          <button className="text-xl bg-orange text-plum p-3 rounded-xl mb-2">
+            back
+          </button>
+        </Link>
+      </div>
+      <div className="border-2 border-plum p-2 rounded-b-xl md:grid rounded-tr-xl flex flex-col  md:grid-cols-12">
+        <img
+          src={toy.toyImage.url}
+          alt={toy.name}
+          className="object-cover h-96 col-span-4"
+        />
+        <div className="col-span-8 p-6">
+          <p className="text-lg text-darkGray">{toy.description}</p>
+          <button className="bg-teal text-white text-lg py-1 mt-6 px-3 rounded-lg">
+            {toy.toyCategory}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

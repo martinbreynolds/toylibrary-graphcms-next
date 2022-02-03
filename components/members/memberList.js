@@ -21,7 +21,7 @@ const MemberList = (props) => {
 
   return (
     <div>
-      <div className="hidden overflow-clip text-sm overflow-hidden lg:grid grid-cols-2 lg:grid-cols-11 gap-4 text-plum bg-orange border-orange border-2 p-3 font-bold rounded-t-lg">
+      <div className="hidden overflow-clip text-sm lg:grid grid-cols-2 lg:grid-cols-11 gap-4 text-plum bg-orange border-orange border-2 p-3 font-bold rounded-t-lg">
         <p className="lg:col-span-3">First Name</p>
         <p className="lg:col-span-3">Last Name</p>
         <p className="col-span-2 lg:col-span-3">Email</p>
