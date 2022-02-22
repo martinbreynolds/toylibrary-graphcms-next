@@ -104,6 +104,7 @@ export default function MobileNav({ session, status }) {
           <>
             {navAdminLinks.map((button) => (
               <button
+                onClick={hiddenFunction}
                 key={button.label}
                 className={
                   new String(router.pathname).valueOf() ==
@@ -129,6 +130,7 @@ export default function MobileNav({ session, status }) {
           <>
             {navLinks.map((button) => (
               <button
+                onClick={hiddenFunction}
                 key={button.label}
                 className={
                   new String(router.pathname).valueOf() ==
