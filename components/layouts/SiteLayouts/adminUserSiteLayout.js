@@ -9,16 +9,22 @@ const AdminSiteLayout = ({ children }) => {
   const { data: session, status } = useSession();
   //Get type of user
   console.log(session?.type);
+  let isAdminUser;
+  if (session?.type === "admin") {
+    isAdminUser = true;
+  } else {
+    isAdminUser = false;
+  }
   const isUser = !!session?.user;
   console.log(session, status);
   if (status === "loading") return <div>loading...</div>;
-  if (!isUser) router.push("./");
+  if (!isAdminUser) router.push("./");
   return (
     <div className=" bg-lightGray">
       <div className="sticky top-0 overflow-hidden z-10">
         <Header session={session} status={status} />
       </div>
-      {session && <main className="p-3">{children}</main>}
+      {session?.type === "admin" && <main className="p-3">{children}</main>}
       <Footer />
     </div>
   );

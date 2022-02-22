@@ -1,6 +1,7 @@
 import NavBar from "./NavBar/navBar";
 
 const Header = ({ session, status }) => {
+  console.log(session);
   return (
     <header className="bg-lightGray ">
       <div className="p-2 lg:hidden">

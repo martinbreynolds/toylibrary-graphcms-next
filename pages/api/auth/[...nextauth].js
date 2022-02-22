@@ -45,6 +45,7 @@ export default NextAuth({
               const user = {
                 id: data.practitioner.id,
                 email: data.practitioner.emailAddress,
+                userType: data.practitioner.userType,
               };
               return user;
             }
@@ -60,12 +61,14 @@ export default NextAuth({
     jwt: ({ token, user }) => {
       if (user) {
         token.id = user.id;
+        token.type = user.userType;
       }
       return token;
     },
     session: ({ session, token }) => {
       if (token) {
         session.id = token.id;
+        session.type = token.type;
       }
       return session;
     },

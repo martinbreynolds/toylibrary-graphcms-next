@@ -25,27 +25,27 @@ export default function AddMember() {
     setFName("");
     setLName("");
     setEmail("");
-    router.push("../members");
+    router.push("../admin/members");
   };
 
   return (
-    <div className="mb-3 bg-teal p-3 rounded-lg">
-      <p className="text-white text-md font-bold mb-3">Create a New Member</p>
+    <div className="mb-3 bg-white p-3 rounded-lg">
+      <p className="text-plum text-md font-bold mb-3">Create a New Member</p>
       <form onSubmit={newMember}>
         <div className="grid grid-cols-4">
-          <label className="text-white" htmlFor="fName">
+          <label className="text-teal" htmlFor="fName">
             First Name
           </label>
-          <label className="text-white" htmlFor="lName">
+          <label className="text-teal" htmlFor="lName">
             Last Name
           </label>
-          <label className="text-white" htmlFor="email">
+          <label className="text-teal" htmlFor="email">
             Email Address
           </label>
         </div>
         <div className="grid grid-cols-4 ">
           <input
-            className="text-plum font-bold rounded-lg mr-3"
+            className="text-plum font-bold border-2 rounded-lg mr-3 h-9 p-5"
             name="fName"
             autoComplete="First Name"
             type="text"
@@ -55,7 +55,7 @@ export default function AddMember() {
           />
 
           <input
-            className="text-plum font-bold mr-3 rounded-lg"
+            className="text-plum font-bold border-2 mr-3 rounded-lg h-9 p-5"
             name="lName"
             autoComplete="Last Name"
             type="text"
@@ -65,7 +65,7 @@ export default function AddMember() {
           />
 
           <input
-            className="text-plum font-bold mr-3 rounded-lg max-w-md"
+            className="text-plum font-bold border-2 mr-3 rounded-lg max-w-md h-9 p-5"
             name="email"
             autoComplete="Email Address"
             type="email"
@@ -78,7 +78,7 @@ export default function AddMember() {
             type="submit"
             className="text-white bg-plum font-bold rounded-lg py-2 px-3"
           >
-            Create New Member
+            Create
           </button>
         </div>
       </form>
